@@ -6,6 +6,7 @@ use System\Router\Router;
 use System\Template\TemplateInterface;
 use System\Router\RouterInterface;
 use System\Template\Twig;
+use System\Lib\YmlParser;
 
 final class App {
 
@@ -21,6 +22,8 @@ final class App {
 
     protected $_url;
 
+    protected $_config = array();
+
     /**
      * Флаг использования на прод.-сервере
      * @var bool
@@ -30,6 +33,7 @@ final class App {
     public function __construct() {
         $this->_templater = new Twig($this);
         $this->_router = new Router($this);
+        $this->loadConfig();
     }
 
     /**
@@ -81,6 +85,23 @@ final class App {
         $url = parse_url($_SERVER["REQUEST_URI"]);
         $path = $url['path'];
         $this->_router->runAction($path);
+    }
+
+    public function loadConfig() {
+
+        $parser = new YmlParser();
+        $this->_config = $parser->parse('config/app.yml');
+
+    }
+
+    public function getConfigParam($param) {
+
+        if (isset($this->_config[$param])) {
+            return $this->_config[$param];
+        }
+
+        throw new \Exception('Отсутствует параметр в конфиге');
+
     }
 
 

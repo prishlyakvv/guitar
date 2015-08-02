@@ -1,5 +1,7 @@
 db_parameters:
-    database_host:     localhost
-    database_name:     test
-    database_user:     root
-    database_password: 12345
+    database_type: 12345
+    database_host: localhost
+    database_name: test
+    database_user: root
+    database_password: 123456
+    database_encoding: utf8

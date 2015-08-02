@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}Серия романов о Гарри Поттере{% endblock %}
+{% block title %}Главная. Список категорий{% endblock %}
 
 {% block content %}
-<h1>Серия романов о Гарри Поттере</h1>
+    <h1>Список категорий</h1>
 
-<div id="books">
-    {% for book in books %}
-    <div class="book">
-        <strong>{{book.number}}</strong>. "<em>{{book.title}}"</em> - {{book.date}}
+    <div class="categories">
+        {% for category in categories %}
+        <div class="category">
+            <strong>{{category.id}}</strong>. "<em>{{category.name}}"</em> - {{category.file}}
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 {% endblock %}
