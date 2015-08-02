@@ -1,0 +1,13 @@
+import: src/Others/Routes/routes.yml
+
+categories:
+    path:      /
+    controller: src\Controllers\App\HomePageController:indexAction
+
+category:
+    path:      /category/
+    controller: src\Controllers\App\CategoryController:indexAction
+
+product:
+    path:      /product/
+    controller: src\Controllers\App\ProductController:indexAction

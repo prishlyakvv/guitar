@@ -1,0 +1,5 @@
+/cache/template/*
+/config/app.yml
+/vendor/*
+/composer.lock
+/.idea
