@@ -22,6 +22,7 @@ class MainModel {
      */
     private $_pdo;
 
+
     private $_srcQuery = '';
     private $_srcQueryObj;
     private $_nameMainTable = 'self';
@@ -31,8 +32,6 @@ class MainModel {
     private $_srcQueryGroup = '';
     private $_srcQueryOrder = '';
     private $_srcQueryLimit = '';
-
-
 
 
     public function __construct($app) {
@@ -51,22 +50,33 @@ class MainModel {
 
     }
 
+    /**
+     * @return \System\App
+     */
     public function getApp() {
         return $this->_app;
     }
 
 
     /**
-     * @param $select
+     * SELECT $columns FROM
+     *
+     * @param $columns
      * @return $this
      */
-    public function selectColumns($select) {
+    public function selectColumns($columns) {
 
-        $this->_srcQuerySelectColumns = $select;
+        $this->_srcQuerySelectColumns = $columns;
 
         return $this;
     }
 
+    /**
+     * SELECT * FROM product AS $alias
+     *
+     * @param $alias
+     * @return $this
+     */
     public function setTblAlias($alias) {
 
         $this->_tblAlias = $alias;
@@ -194,10 +204,15 @@ class MainModel {
     }
 
 
+    /**
+     * Получить все записи результата
+     *
+     * @return mixed
+     */
     public function fetchAll() {
 
-
         return $this->_srcQueryObj->fetchAll();
+
     }
 
 
@@ -215,7 +230,6 @@ class MainModel {
         }
 
         return "
-
                 SELECT
                     {$this->_srcQuerySelectColumns}
                 FROM
@@ -226,7 +240,6 @@ class MainModel {
                 {$this->_srcQueryOrder}
                 {$this->_srcQueryLimit}
             ";
-
     }
 
 } 
