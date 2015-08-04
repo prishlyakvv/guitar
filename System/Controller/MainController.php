@@ -48,4 +48,13 @@ class MainController {
 
     }
 
+    /**
+     * @param array $data
+     * @param $template
+     * @return string
+     */
+    protected function render($data = array(), $template) {
+        return $this->getApp()->getTemplater()->render($data, $template);
+    }
+
 } 

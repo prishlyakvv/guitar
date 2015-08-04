@@ -44,4 +44,13 @@ abstract class MainComponent {
 
     protected abstract function run();
 
+    /**
+     * @param array $data
+     * @param $template
+     * @return string
+     */
+    protected function render($data = array(), $template) {
+        return $this->getApp()->getTemplater()->render($data, $template);
+    }
+
 } 

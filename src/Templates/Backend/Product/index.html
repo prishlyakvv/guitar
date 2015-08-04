@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Список категорий. Админка{% endblock %}
+{% block title %}Список продуктов. Админка{% endblock %}
 
 {% block content %}
-<h1>Список категорий. Админка</h1>
+<h1>Список продуктов. Админка</h1>
 
 {{ component|raw }}
 
@@ -18,11 +18,11 @@
             <td>&nbsp;</td>
         </tr>
 
-        {% for category in categories %}
+        {% for product in products %}
         <tr>
-            <td>{{ category.id }}</td>
-            <td>{{ category.name|e }}</td>
-            <td>{{ category.file }}</td>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name|e }}</td>
+            <td>{{ product.file }}</td>
             <td><input type="checkbox" name="remove" value="{{ category.id }}"></td>
             <td><a href="/admin/category/?id={{ category.id }}">Редактировать</a>
         </tr>

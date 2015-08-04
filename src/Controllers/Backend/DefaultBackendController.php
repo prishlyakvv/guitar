@@ -13,11 +13,8 @@ class DefaultBackendController extends MainBackendController {
         $componentResp = $component->toString();
 
         $this->getApp()->getTemplater()->render(array(
-            'product' => 456,
             'component' => $componentResp,
         ), 'Backend/Default/index.html');
-
-
 
     }
 

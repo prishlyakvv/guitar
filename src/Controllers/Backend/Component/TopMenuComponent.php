@@ -13,7 +13,7 @@ class TopMenuComponent extends MainComponent {
 
     protected function run() {
 
-        return 'TopMenuComponent';
+        return $this->render(array(), 'Backend/Component/topMenuComponent.html');
 
     }
 

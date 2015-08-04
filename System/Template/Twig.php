@@ -24,6 +24,8 @@ class Twig extends MainTemplate implements TemplateInterface {
 
         $this->getApp()->setResponse($this->_environment->render($template, $data));
 
+        return $this->getApp()->getResponse();
+
     }
 
 } 
