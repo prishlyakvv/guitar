@@ -2,6 +2,7 @@
 
 namespace System\Router;
 
+use src\Controllers\MainController;
 use System\Lib\YmlParser;
 
 class Router extends MainRouter implements RouterInterface {
@@ -28,7 +29,7 @@ class Router extends MainRouter implements RouterInterface {
         $actionController = $controllerPathArr[1];
 
         if (!method_exists($classController, $actionController)) {
-            throw new \Exception('Отсутствует класс или екшен');
+            throw new \Exception('Отсутствует класс или екшен (' . $classController . '->' . $actionController . ')');
         }
 
         $controller = new $classController($this->getApp());
@@ -62,8 +63,24 @@ class Router extends MainRouter implements RouterInterface {
         }
 
         if (!$this->_controller) {
-            throw new \Exception('Не определен Url');
+            $this->_controller = new MainController($this->getApp());
+            $this->_controller->notFound();
         }
+
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getPathByName($name) {
+
+        if (isset($this->_routes[$name]) && isset($this->_routes[$name]['path'])) {
+            return $this->_routes[$name]['path'];
+        }
+
+        throw new \Exception('Неверное имя роута');
 
     }
 

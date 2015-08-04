@@ -1,0 +1,19 @@
+backend_index:
+    path:      /admin
+    controller: src\Controllers\Backend\DefaultBackendController:indexAction
+
+backend_categories:
+    path:      /admin/categories
+    controller: src\Controllers\Backend\CategoryController:indexAction
+
+backend_category:
+    path:      /admin/category/
+    controller: src\Controllers\Backend\CategoryController:categoryAction
+
+backend_products:
+    path:      /admin/products
+    controller: src\Controllers\Backend\ProductController:indexAction
+
+backend_product:
+    path:      /admin/product/
+    controller: src\Controllers\Backend\ProductController:productAction

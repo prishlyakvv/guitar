@@ -22,7 +22,7 @@ class Twig extends MainTemplate implements TemplateInterface {
             'auto_reload' => $cacheRebuild,
         ));
 
-        echo $this->_environment->render($template, $data);
+        $this->getApp()->setResponse($this->_environment->render($template, $data));
 
     }
 

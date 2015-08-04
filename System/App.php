@@ -30,6 +30,8 @@ final class App {
      */
     protected $_prod = false;
 
+    protected $_response = '';
+
     public function __construct() {
         $this->_templater = new Twig($this);
         $this->_router = new Router($this);
@@ -85,6 +87,8 @@ final class App {
         $url = parse_url($_SERVER["REQUEST_URI"]);
         $path = $url['path'];
         $this->_router->runAction($path);
+
+        echo $this->getResponse();
     }
 
     public function loadConfig() {
@@ -101,6 +105,24 @@ final class App {
         }
 
         throw new \Exception('Отсутствует параметр в конфиге');
+
+    }
+
+    /**
+     * @return string
+     */
+    public function getResponse() {
+
+        return $this->_response;
+
+    }
+
+    /**
+     * @param $response
+     */
+    public function setResponse($response) {
+
+        $this->_response = $response;
 
     }
 

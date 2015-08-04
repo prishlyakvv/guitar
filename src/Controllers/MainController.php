@@ -7,7 +7,7 @@ use System\Controller\MainController as BaseMainController;
 
 class MainController extends BaseMainController {
 
-    protected function notFound() {
+    public function notFound() {
 
         header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
 
@@ -19,5 +19,16 @@ class MainController extends BaseMainController {
 
         exit();
     }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    protected function getRoutePathByName($name) {
+
+        return $this->getApp()->getRouter()->getPathByName($name);
+
+    }
+
 
 } 
