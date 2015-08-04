@@ -9,8 +9,8 @@ class MainModel {
     protected $_tbl = '';
     protected $_tblAlias = 'self';
 
-    const JOIN_TYPE = 'join';
-    const JOIN_TYPE_LEFT = 'left join';
+    const JOIN_TYPE = 'JOIN';
+    const JOIN_TYPE_LEFT = 'LEFT JOIN';
 
     /**
      * @var \System\App
@@ -24,6 +24,10 @@ class MainModel {
 
 
     private $_srcQuery = '';
+
+    /**
+     * @var \PDOStatement
+     */
     private $_srcQueryObj;
     private $_nameMainTable = 'self';
     private $_srcQuerySelectColumns = '*';
@@ -61,12 +65,26 @@ class MainModel {
     /**
      * SELECT $columns FROM
      *
-     * @param $columns
+     * @param array $columns
+     * @throws \Exception
      * @return $this
      */
-    public function selectColumns($columns) {
+    public function selectColumns($columns = array()) {
 
-        $this->_srcQuerySelectColumns = $columns;
+        if (!is_array($columns)) {
+            throw new \Exception('Параметр selectColumns.$columns должно быть массивом');
+        }
+
+        $num = 0;
+        $count = count($columns);
+        $this->_srcQuerySelectColumns = '';
+        foreach ($columns as $alias => $column) {
+            $num++;
+            $this->_srcQuerySelectColumns .= ' ' . $column . ' AS "' . $alias . '" ';
+            if ($count > $num) {
+                $this->_srcQuerySelectColumns .= ", ";
+            }
+        }
 
         return $this;
     }
@@ -96,7 +114,7 @@ class MainModel {
      */
     public function info($tbl, $name, $columnLeft, $columnRight, $type = self::JOIN_TYPE) {
 
-        $this->_srcQueryJoin[] = " {$type} JOIN {$tbl} AS {$name} ON {$name}.{$columnLeft} = {$this->_nameMainTable}.$columnRight";
+        $this->_srcQueryJoin[] = " {$type} {$tbl} AS {$name} ON {$name}.{$columnLeft} = {$this->_nameMainTable}.$columnRight";
 
         return $this;
     }
@@ -121,7 +139,7 @@ class MainModel {
         if (is_array($val)) {
             $val = join(', ', $val);
             $where .= " IN ({$val})";
-        } elseif ($val) {
+        } elseif (!empty($val) || $val === 0) {
             $where .= " = {$val}";
         }
 
@@ -194,10 +212,17 @@ class MainModel {
 
         $this->_srcQuery = $this->getSQL();
 
-        $stmt = $this->_pdo->prepare($this->_srcQuery);
-        $stmt->execute();
+        try {
+            $stmt = $this->_pdo->prepare($this->_srcQuery);
+            $stmt->execute();
 
-        $this->_srcQueryObj = $stmt;
+            $this->_srcQueryObj = $stmt;
+        } catch(\Exception $ex) {
+            echo 'Ошибка в запросе: <hr> <pre>' . $this->_srcQuery . '</pre><hr>';
+            echo 'Трейс: <hr> <pre>' . (string) $ex . '</pre><hr>';
+            die;
+        }
+
 
         return $this;
 
@@ -211,7 +236,18 @@ class MainModel {
      */
     public function fetchAll() {
 
-        return $this->_srcQueryObj->fetchAll();
+        return (array) $this->_srcQueryObj->fetchAll();
+
+    }
+
+    /**
+     * Получить одну запись
+     *
+     * @return mixed
+     */
+    public function fetchOne() {
+
+        return (array) $this->_srcQueryObj->fetchObject();
 
     }
 
@@ -229,7 +265,7 @@ class MainModel {
             $wheres = 'WHERE ' . implode(' ', $this->_srcQueryWhere);
         }
 
-        return "
+        $sql = "
                 SELECT
                     {$this->_srcQuerySelectColumns}
                 FROM
@@ -240,6 +276,8 @@ class MainModel {
                 {$this->_srcQueryOrder}
                 {$this->_srcQueryLimit}
             ";
+
+        return $sql;
     }
 
 } 

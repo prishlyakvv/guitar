@@ -1,0 +1,11 @@
+categories:
+    path:      /
+    controller: src\Controllers\App\CategoryController:indexAction
+
+category:
+    path:      /category/
+    controller: src\Controllers\App\CategoryController:categoryAction
+
+product:
+    path:      /product/
+    controller: src\Controllers\App\ProductController:indexAction

@@ -16,6 +16,7 @@ class Router extends MainRouter implements RouterInterface {
      * Запуск екшена роута
      *
      * @param $url
+     * @throws \Exception
      */
     public function runAction($url) {
 
@@ -25,6 +26,10 @@ class Router extends MainRouter implements RouterInterface {
         $controllerPathArr = explode(':',$controllerPath);
         $classController = $controllerPathArr[0];
         $actionController = $controllerPathArr[1];
+
+        if (!method_exists($classController, $actionController)) {
+            throw new \Exception('Отсутствует класс или екшен');
+        }
 
         $controller = new $classController($this->getApp());
         $controller->$actionController();

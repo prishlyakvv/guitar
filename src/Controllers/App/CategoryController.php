@@ -2,29 +2,39 @@
 
 namespace src\Controllers\App;
 
-use System\Controller\MainController;
+use src\Controllers\MainController;
+use src\Models\Category;
+use src\Models\Product;
 
 
 class CategoryController extends MainController {
 
     public function indexAction() {
 
+        $catTbl = new Category($this->getApp());
+        $categories = $catTbl->getAllCategories();
 
+        $this->getApp()->getTemplater()->render(array(
+            'categories' => $categories,
+        ), 'App/Category/index.html');
 
-        $data = array(
-            'books' => array(
-                array('number' => 'Книга 1', 'title' => 'Гарри Поттер и философский камень', 'date' => '30.06.1997'),
-                array('number' => 'Книга 2', 'title' => 'Гарри Поттер и Тайная комната', 'date' => '2.07.1998'),
-                array('number' => 'Книга 3', 'title' => 'Гарри Поттер и узник Азкабана', 'date' => '8.07.1999'),
-                array('number' => 'Книга 4', 'title' => 'Гарри Поттер и Кубок огня', 'date' => '8.07.2000'),
-                array('number' => 'Книга 5', 'title' => 'Гарри Поттер и Орден Феникса', 'date' => '21.07.2003'),
-                array('number' => 'Книга 6', 'title' => 'Гарри Поттер и Принц-полукровка', 'date' => '16.07.2005'),
-                array('number' => 'Книга 7', 'title' => 'Гарри Поттер и Дары Смерти', 'date' => '21.07.2007')
-            ));
+    }
 
-        $tmpl = 'index/index.html';
+    public function categoryAction() {
 
-        $this->getApp()->getTemplater()->render($data, $tmpl);
+        $catId = (int) $this->getRequestParam('id', 0);
+
+        $catTbl = new Category($this->getApp());
+        $products = $catTbl->getProductsFromCategory($catId);
+
+        if (!$products) {
+            $this->notFound();
+        }
+
+        $this->getApp()->getTemplater()->render(array(
+            'products' => $products,
+        ), 'App/Category/products.html');
+
     }
 
 } 

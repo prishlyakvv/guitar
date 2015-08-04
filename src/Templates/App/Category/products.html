@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Список продуктов категории ХХХ{% endblock %}
+
+{% block content %}
+    <h1>Список продуктов категории ХХХ</h1>
+
+    <div class="categories">
+        {% for product in products %}
+        <div class="category">
+            <strong>{{product.id}}</strong>. "<em>{{product.name}}"</em> - {{product.file}}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
