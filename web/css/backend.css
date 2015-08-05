@@ -1,0 +1,33 @@
+header {
+    text-align: center;
+    background: #aae;
+    min-height: 100px;
+    padding: 10px;
+}
+
+nav {
+    float: left;
+    width: 300px;
+    background: #eee;
+}
+
+nav ul{
+    line-height: 30px;
+}
+
+article {
+    float: left;
+}
+
+article #content {
+    padding: 10px;
+    min-height: 700px;
+}
+
+footer {
+    text-align: center;
+    clear: both;
+    background: #aee;
+    min-height: 100px;
+    padding: 10px;
+}

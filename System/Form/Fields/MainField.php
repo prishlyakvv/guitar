@@ -18,6 +18,19 @@ abstract class MainField {
 
 
     /**
+     * @var string
+     */
+    protected $_htmlTag = '';
+
+    /**
+     * @return string
+     */
+    public function getHtmlTag()
+    {
+        return $this->_htmlTag;
+    }
+
+    /**
      * @return String
      */
     public function getName()

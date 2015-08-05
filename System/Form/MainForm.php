@@ -4,6 +4,7 @@ namespace System\Form;
 
 use System\Form\Fields\Submit;
 use System\Form\Fields\Text;
+use System\Form\Fields\Textarea;
 
 class MainForm {
 
@@ -30,6 +31,18 @@ class MainForm {
 
     }
 
+    protected function checkName($name) {
+
+        foreach($this->_elements as $element) {
+
+            if ($element->getName() == $name) {
+                throw new \Exception('Повторяющееся имя для элемента фломы');
+            }
+
+        }
+
+    }
+
 
     /**
      * @param $name
@@ -41,15 +54,41 @@ class MainForm {
      */
     public function addText($name, $label, $value, $require, $paramValidate) {
 
-        $el = new Text();
+        $this->checkName($name);
 
+        $el = new Text();
         $el->setName($name);
-        $el->getLabel($label);
+        $el->setLabel($label);
         $el->setValue($value);
         $el->setRequire($require);
         $el->setValidateOpts($paramValidate);
 
-        $this->_elements[] = $el;
+        $this->addElement($el);
+
+        return $this;
+
+    }
+
+    /**
+     * @param $name
+     * @param $label
+     * @param $value
+     * @param $require
+     * @param $paramValidate
+     * @return $this
+     */
+    public function addTextarea($name, $label, $value, $require, $paramValidate) {
+
+        $this->checkName($name);
+
+        $el = new Textarea();
+        $el->setName($name);
+        $el->setLabel($label);
+        $el->setValue($value);
+        $el->setRequire($require);
+        $el->setValidateOpts($paramValidate);
+
+        $this->addElement($el);
 
         return $this;
 
@@ -62,12 +101,14 @@ class MainForm {
      */
     public function addSubmit($name, $value) {
 
+        $this->checkName($name);
+
         $el = new Submit();
 
         $el->setName($name);
         $el->setValue($value);
 
-        $this->_elements[] = $el;
+        $this->addElement($el);
 
         return $this;
 
@@ -79,12 +120,12 @@ class MainForm {
             'action' => $this->getAction(),
             'method' => $this->getMethod(),
             'name' => $this->getName(),
+            'fields' => $this->getElements(),
         );
 
         $res = $this->renderTmpl($data, $this->getTempl());
 
-        var_dump($res);die;
-
+        return $res;
 
     }
 
@@ -169,6 +210,22 @@ class MainForm {
     public function setTempl($templ)
     {
         $this->_templ = $templ;
+    }
+
+    /**
+     * @return array
+     */
+    public function getElements()
+    {
+        return $this->_elements;
+    }
+
+    /**
+     * @param $element
+     */
+    public function addElement($element)
+    {
+        $this->_elements[] = $element;
     }
 
 } 

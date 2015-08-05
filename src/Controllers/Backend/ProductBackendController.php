@@ -4,6 +4,7 @@ namespace src\Controllers\Backend;
 
 use src\Controllers\Backend\Component\TopMenuComponent;
 use src\Models\Product;
+use src\Controllers\Backend\Component\NotifyComponent;
 
 class ProductBackendController extends MainBackendController {
 
@@ -15,9 +16,13 @@ class ProductBackendController extends MainBackendController {
         $productTbl = new Product($this->getApp());
         $products = $productTbl->getAllProducts();
 
+        $componentNotify = new NotifyComponent($this);
+        $componentNotifyResp = $componentNotify->toString();
+
         $this->render(array(
-            'component' => $componentResp,
+            'componentMenu' => $componentResp,
             'products' => $products,
+            'componentNotify' => $componentNotifyResp,
         ), 'Backend/Product/index.html');
 
     }

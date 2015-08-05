@@ -2,6 +2,38 @@
     <form action="{{ action }}" method="{{ method }}" name="{{ name }}">
 
 
+        {% for field in fields %}
+
+            {% if field.htmlTag == 'input_text' %}
+                <div>
+                    <div>
+                        <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
+                    </div>
+                    <div>
+                        <input type="text" name="{{ field.name }}" value="{{ field.value }}" id="{{ loop.parent.name }}_{{ field.name }}">
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if field.htmlTag == 'textarea' %}
+                <div>
+                    <div>
+                        <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
+                    </div>
+                    <div>
+                        <textarea name="{{ field.name }}" id="{{ loop.parent.name }}_{{ field.name }}">{{ field.value }}</textarea>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if field.htmlTag == 'input_submit' %}
+                <div>
+                    <input type="submit" name="{{ field.name }}" value="{{ field.value }}" id="{{ loop.parent.name }}_{{ field.name }}">
+                </div>
+            {% endif %}
+
+        {% endfor %}
+
 
     </form>
 </div>

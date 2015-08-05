@@ -15,12 +15,17 @@ class Twig extends MainTemplate implements TemplateInterface {
     public function render($data, $template){
 
         $loader = new Twig_Loader_Filesystem('../src/Templates');
-        $cacheRebuild = ! $this->getApp()->isProd();
+        $isProd = $this->getApp()->isProd();
 
         $this->_environment = new Twig_Environment($loader, array(
             'cache'       => '../cache/template',
-            'auto_reload' => $cacheRebuild,
+            'auto_reload' => !$isProd,
+            'debug' => !$isProd,
         ));
+
+        if (!$isProd) {
+            $this->_environment->addExtension(new \Twig_Extension_Debug());
+        }
 
         $this->getApp()->setResponse($this->_environment->render($template, $data));
 

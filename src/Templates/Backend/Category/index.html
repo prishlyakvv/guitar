@@ -1,13 +1,18 @@
-{% extends "base.html" %}
+{% extends "baseBackend.html" %}
 
 {% block title %}Список категорий. Админка{% endblock %}
 
-{% block content %}
+
+{% block header %}
 <h1>Список категорий. Админка</h1>
-
-{{ component|raw }}
-
 {{ componentNotify|raw }}
+{% endblock %}
+
+{% block menu %}
+{{ componentMenu|raw }}
+{% endblock %}
+
+{% block content %}
 
 <form method="post">
     <table>
@@ -37,6 +42,5 @@
 
     </table>
 </form>
-
 
 {% endblock %}

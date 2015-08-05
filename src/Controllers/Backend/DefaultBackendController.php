@@ -2,7 +2,7 @@
 
 namespace src\Controllers\Backend;
 
-
+use src\Controllers\Backend\Component\NotifyComponent;
 use src\Controllers\Backend\Component\TopMenuComponent;
 
 class DefaultBackendController extends MainBackendController {
@@ -12,8 +12,12 @@ class DefaultBackendController extends MainBackendController {
         $component = new TopMenuComponent($this);
         $componentResp = $component->toString();
 
+        $componentNotify = new NotifyComponent($this);
+        $componentNotifyResp = $componentNotify->toString();
+
         $this->render(array(
-            'component' => $componentResp,
+            'componentMenu' => $componentResp,
+            'componentNotify' => $componentNotifyResp,
         ), 'Backend/Default/index.html');
 
     }

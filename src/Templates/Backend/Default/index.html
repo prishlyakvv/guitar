@@ -1,10 +1,16 @@
-{% extends "base.html" %}
+{% extends "baseBackend.html" %}
 
 {% block title %}Главная. Админка{% endblock %}
 
-{% block content %}
-    <h1>Главная. Админка</h1>
+{% block header %}
+<h1>Категория. Админка</h1>
+{{ componentNotify|raw }}
+{% endblock %}
 
-        {{ component|raw }}
+{% block menu %}
+{{ componentMenu|raw }}
+{% endblock %}
+
+{% block content %}
 
 {% endblock %}
