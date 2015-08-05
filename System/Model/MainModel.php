@@ -286,6 +286,8 @@ class MainModel {
      */
     public function delete($id, $removeByColum = 'id') {
 
+        $this->preRemove($id, $removeByColum);
+
         try {
 
             if (is_array($id)) {
@@ -301,13 +303,33 @@ class MainModel {
                 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             }
 
-            return $stmt->execute();
+            $res = $stmt->execute();
+            $this->postRemove($res);
+            return $res;
+
         } catch(\Exception $ex) {
             $this->logExcept($ex);
             return false;
         }
 
     }
+
+    /**
+     * Выполняется перед удалением.
+     * Содержит параметры иницатора
+     *
+     * @param $id
+     * @param $removeByColum
+     */
+    protected function preRemove($id, $removeByColum) {}
+
+    /**
+     * Выполняется после удаления
+     * Содержит результат
+     *
+     * @param $res
+     */
+    protected function postRemove($res) {}
 
     /**
      * @param $ex

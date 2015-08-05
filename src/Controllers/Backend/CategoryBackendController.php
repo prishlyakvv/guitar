@@ -4,13 +4,14 @@ namespace src\Controllers\Backend;
 
 use src\Controllers\Backend\Component\TopMenuComponent;
 use src\Models\Category;
+use src\Controllers\Backend\Component\NotifyComponent;
 
 class CategoryBackendController extends MainBackendController {
 
     public function indexAction() {
 
-        $component = new TopMenuComponent($this);
-        $componentResp = $component->toString();
+        $componentMenu = new TopMenuComponent($this);
+        $componentMenuResp = $componentMenu->toString();
 
         $categoriesTbl = new Category($this->getApp());
         $cats = $categoriesTbl->getAllCategories();
@@ -24,9 +25,12 @@ class CategoryBackendController extends MainBackendController {
             $this->redirect('backend_categories');
         }
 
+        $componentNotify = new NotifyComponent($this);
+        $componentNotifyResp = $componentNotify->toString();
 
         $this->render(array(
-            'component' => $componentResp,
+            'component' => $componentMenuResp,
+            'componentNotify' => $componentNotifyResp,
             'categories' => $cats,
         ), 'Backend/Category/index.html');
 

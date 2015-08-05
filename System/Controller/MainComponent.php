@@ -53,4 +53,23 @@ abstract class MainComponent {
         return $this->getApp()->getTemplater()->render($data, $template);
     }
 
+    /**
+     * @return array
+     */
+    protected function getNotified() {
+
+        return $this->getApp()->getSession()->getNotified();
+
+    }
+
+    /**
+     * @param $message
+     * @return bool
+     */
+    protected function addNotify($message) {
+
+        return $this->getApp()->getSession()->addNotify($message);
+
+    }
+
 } 
