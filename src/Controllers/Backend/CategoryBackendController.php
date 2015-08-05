@@ -5,6 +5,7 @@ namespace src\Controllers\Backend;
 use src\Controllers\Backend\Component\TopMenuComponent;
 use src\Models\Category;
 use src\Controllers\Backend\Component\NotifyComponent;
+use System\Form\MainForm;
 
 class CategoryBackendController extends MainBackendController {
 
@@ -27,6 +28,11 @@ class CategoryBackendController extends MainBackendController {
 
         $componentNotify = new NotifyComponent($this);
         $componentNotifyResp = $componentNotify->toString();
+
+
+        $form = new MainForm($this->getApp());
+        $form->addText('dfs', 'dfs', 'dfs', 'dfs', 'dfs');
+        $form->render();
 
         $this->render(array(
             'component' => $componentMenuResp,
