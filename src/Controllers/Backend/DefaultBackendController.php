@@ -12,7 +12,7 @@ class DefaultBackendController extends MainBackendController {
         $component = new TopMenuComponent($this);
         $componentResp = $component->toString();
 
-        $this->getApp()->getTemplater()->render(array(
+        $this->render(array(
             'component' => $componentResp,
         ), 'Backend/Default/index.html');
 

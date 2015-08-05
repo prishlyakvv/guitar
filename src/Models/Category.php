@@ -52,4 +52,14 @@ class Category extends MainModel {
 
     }
 
+    /**
+     * @param array $ids
+     * @return bool
+     */
+    public function removeCategories($ids = array()) {
+
+        return $this->delete($ids);
+
+    }
+
 } 

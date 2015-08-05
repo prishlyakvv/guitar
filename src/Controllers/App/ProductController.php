@@ -19,7 +19,7 @@ class ProductController extends MainController {
             $this->notFound();
         }
 
-        $this->getApp()->getTemplater()->render(array(
+        $this->render(array(
             'product' => $product,
         ), 'App/Product/product.html');
     }

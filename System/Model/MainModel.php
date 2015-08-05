@@ -3,6 +3,7 @@
 namespace System\Model;
 
 use PDO;
+use System\Lib\SmallLibs;
 
 class MainModel {
 
@@ -218,9 +219,7 @@ class MainModel {
 
             $this->_srcQueryObj = $stmt;
         } catch(\Exception $ex) {
-            echo 'Ошибка в запросе: <hr> <pre>' . $this->_srcQuery . '</pre><hr>';
-            echo 'Трейс: <hr> <pre>' . (string) $ex . '</pre><hr>';
-            die;
+            $this->logExcept($ex);
         }
 
 
@@ -265,7 +264,7 @@ class MainModel {
             $wheres = 'WHERE ' . implode(' ', $this->_srcQueryWhere);
         }
 
-        $sql = "
+        $this->_srcQuery = "
                 SELECT
                     {$this->_srcQuerySelectColumns}
                 FROM
@@ -277,7 +276,45 @@ class MainModel {
                 {$this->_srcQueryLimit}
             ";
 
-        return $sql;
+        return $this->_srcQuery;
+    }
+
+    /**
+     * @param $id
+     * @param string $removeByColum
+     * @return bool
+     */
+    public function delete($id, $removeByColum = 'id') {
+
+        try {
+
+            if (is_array($id)) {
+
+                $ids = implode(',', SmallLibs::int_array($id));
+
+                $this->_srcQuery = "DELETE FROM {$this->_tbl} WHERE FIND_IN_SET ({$removeByColum}, :id)";
+                $stmt = $this->_pdo->prepare($this->_srcQuery);
+                $stmt->bindParam(':id', $ids, PDO::PARAM_STR);
+            } else {
+                $this->_srcQuery = "DELETE FROM {$this->_tbl} WHERE {$removeByColum} = :id";
+                $stmt = $this->_pdo->prepare($this->_srcQuery);
+                $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            }
+
+            return $stmt->execute();
+        } catch(\Exception $ex) {
+            $this->logExcept($ex);
+            return false;
+        }
+
+    }
+
+    /**
+     * @param $ex
+     */
+    protected function logExcept($ex) {
+        echo 'Ошибка в запросе: <hr> <pre>' . $this->_srcQuery . '</pre><hr>';
+        echo 'Трейс: <hr> <pre>' . (string) $ex . '</pre><hr>';
     }
 
 } 

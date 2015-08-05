@@ -23,13 +23,14 @@
             <td>{{ category.id }}</td>
             <td>{{ category.name|e }}</td>
             <td>{{ category.file }}</td>
-            <td><input type="checkbox" name="remove" value="{{ category.id }}"></td>
-            <td><a href="/admin/category/?id={{ category.id }}">Редактировать</a>
+            <td><input type="checkbox" name="remove[]" value="{{ category.id }}"></td>
+            <td><a href="/admin/category/?id={{ category.id }}">Редактировать</a></td>
         </tr>
         {% endfor %}
 
         <tr>
-            <td colspan="4"><input type="submit"></td>
+            <td colspan="2"><input type="submit"></td>
+            <td colspan="2"><a href="/admin/category/?id=0">Добавить</a></td>
         </tr>
 
     </table>

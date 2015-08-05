@@ -71,13 +71,34 @@ class Router extends MainRouter implements RouterInterface {
 
     /**
      * @param $name
-     * @return mixed
+     * @param array $params
      * @throws \Exception
+     * @return mixed
      */
-    public function getPathByName($name) {
+    public function getPathByName($name, $params = array()) {
 
         if (isset($this->_routes[$name]) && isset($this->_routes[$name]['path'])) {
-            return $this->_routes[$name]['path'];
+
+            $path = $this->_routes[$name]['path'];
+            if ($params) {
+                if (is_array($params)) {
+                    $paramsTmp = $params;
+                    $params = '';
+                    $num = 0;
+                    $count = count($paramsTmp);
+                    foreach ($paramsTmp as $key => $param) {
+                        $num++;
+                        $params .= $key . '=' . $param;
+                        if ($count > $num) {
+                            $params .= "& ";
+                        }
+
+                    }
+                }
+                $path = $path . '?' . $params;
+            }
+
+            return $path;
         }
 
         throw new \Exception('Неверное имя роута');

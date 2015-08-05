@@ -14,7 +14,7 @@ class CategoryController extends MainController {
         $catTbl = new Category($this->getApp());
         $categories = $catTbl->getAllCategories();
 
-        $this->getApp()->getTemplater()->render(array(
+        $this->render(array(
             'categories' => $categories,
         ), 'App/Category/index.html');
 
@@ -31,7 +31,7 @@ class CategoryController extends MainController {
             $this->notFound();
         }
 
-        $this->getApp()->getTemplater()->render(array(
+        $this->render(array(
             'products' => $products,
         ), 'App/Category/products.html');
 

@@ -3,6 +3,7 @@
 namespace System;
 
 use System\Router\Router;
+use System\Services\Session;
 use System\Template\TemplateInterface;
 use System\Router\RouterInterface;
 use System\Template\Twig;
@@ -32,7 +33,13 @@ final class App {
 
     protected $_response = '';
 
+    /**
+     * @var Services\Session
+     */
+    protected $_session;
+
     public function __construct() {
+        $this->_session = new Session($this);
         $this->_templater = new Twig($this);
         $this->_router = new Router($this);
         $this->loadConfig();
@@ -126,6 +133,12 @@ final class App {
 
     }
 
+    /**
+     * @return Session
+     */
+    public function getSession() {
+        return $this->_session;
+    }
 
 }
 

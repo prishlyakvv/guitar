@@ -13,7 +13,7 @@ class MainController extends BaseMainController {
 
         $url = htmlentities('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], ENT_QUOTES);
 
-        $this->getApp()->getTemplater()->render(array(
+        echo $this->render(array(
             'url' => $url,
         ), 'notFound.html');
 
