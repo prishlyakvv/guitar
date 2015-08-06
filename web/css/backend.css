@@ -35,3 +35,15 @@ footer {
 .error {
     color: red;
 }
+
+table.list {
+    width: 800px;
+    border: 1px solid black;
+
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+table.list td{
+    border: 1px solid black;
+}
