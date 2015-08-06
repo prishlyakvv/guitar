@@ -1,10 +1,16 @@
-{% extends "base.html" %}
+{% extends "baseFrontend.html" %}
 
 {% block title %}Список продуктов категории ХХХ{% endblock %}
 
-{% block content %}
-    <h1>Список продуктов категории ХХХ</h1>
+{% block header %}
+<h1>Список продуктов категории ХХХ</h1>
+{% endblock %}
 
+{% block menu %}
+{{ leftMenu|raw }}
+{% endblock %}
+
+{% block content %}
     <div class="categories">
         {% for product in products %}
         <div class="category">

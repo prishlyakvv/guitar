@@ -1,10 +1,17 @@
-{% extends "base.html" %}
+{% extends "baseFrontend.html" %}
 
 {% block title %}Главная. Список категорий{% endblock %}
 
-{% block content %}
-    <h1>Список категорий</h1>
+{% block header %}
+<h1>Список категорий</h1>
+{% endblock %}
 
+{% block menu %}
+{{ leftMenu|raw }}
+{% endblock %}
+
+
+{% block content %}
     <div class="categories">
         {% for category in categories %}
         <div class="category">

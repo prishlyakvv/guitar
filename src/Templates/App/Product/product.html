@@ -1,9 +1,16 @@
-{% extends "base.html" %}
+{% extends "baseFrontend.html" %}
 
 {% block title %}Продукт ХХХ{% endblock %}
 
+{% block header %}
+<h1>Продукт ХХХ</h1>
+{% endblock %}
+
+{% block menu %}
+{{ leftMenu|raw }}
+{% endblock %}
+
 {% block content %}
-    <h1>Продукт ХХХ</h1>
 
     {{product.id}}
     {{product.name}}

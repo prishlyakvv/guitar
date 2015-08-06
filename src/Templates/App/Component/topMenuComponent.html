@@ -1,0 +1,18 @@
+<div class="backend-component top-menu">
+
+    <div class="menu">
+        <ul>
+
+            <li>
+                <a href="/">Главная</a>
+            </li>
+
+            {% for category in categories %}
+            <li>
+                <a href="/category/?id={{category.id}}">{{category.name}}</a>
+            </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+</div>
