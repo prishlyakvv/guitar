@@ -23,6 +23,11 @@ abstract class MainField {
     protected $_htmlTag = '';
 
     /**
+     * @var string
+     */
+    protected $_error = '';
+
+    /**
      * @return string
      */
     public function getHtmlTag()
@@ -60,6 +65,22 @@ abstract class MainField {
     public function setValue($value)
     {
         $this->_value = $value;
+    }
+
+    /**
+     * @return string
+     */
+    public function getError()
+    {
+        return $this->_error;
+    }
+
+    /**
+     * @param string $error
+     */
+    public function setError($error)
+    {
+        $this->_error = $error;
     }
 
 

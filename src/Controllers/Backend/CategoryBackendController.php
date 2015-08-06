@@ -5,7 +5,7 @@ namespace src\Controllers\Backend;
 use src\Controllers\Backend\Component\TopMenuComponent;
 use src\Models\Category;
 use src\Controllers\Backend\Component\NotifyComponent;
-use System\Form\MainForm;
+use src\Form\ProductFormType;
 
 class CategoryBackendController extends MainBackendController {
 
@@ -57,11 +57,14 @@ class CategoryBackendController extends MainBackendController {
         $componentNotify = new NotifyComponent($this);
         $componentNotifyResp = $componentNotify->toString();
 
+        $form = new ProductFormType($this->getApp(), $this);
 
-        $form = new MainForm($this->getApp());
-        $form->addText('dfs', 'dfs', 'dfs', 'dfs', 'dfs');
-        $form->addTextarea('dfs2', 'dfs2', 'dfs2', 'dfs2', 'dfs2');
-        $form->addSubmit('dfhj', 'dfkhlis');
+        if ($_POST) {
+            if ($form->fillAndIsValid()) {
+
+            }
+        }
+
         $formR = $form->render();
 
         $this->render(array(

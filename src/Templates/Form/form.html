@@ -6,6 +6,9 @@
 
             {% if field.htmlTag == 'input_text' %}
                 <div>
+                    {% if field.error %}
+                        <div class="error">{{ field.error|raw }}</div>
+                    {% endif %}
                     <div>
                         <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
                     </div>
@@ -17,6 +20,9 @@
 
             {% if field.htmlTag == 'textarea' %}
                 <div>
+                    {% if field.error %}
+                        <div class="error">{{ field.error|raw }}</div>
+                    {% endif %}
                     <div>
                         <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
                     </div>
