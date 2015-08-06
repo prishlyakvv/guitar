@@ -101,7 +101,7 @@ class MainFormType {
         }
 
 
-        return (bool) $this->_errors;
+        return !$this->_errors;
 
     }
 

@@ -62,4 +62,22 @@ class Category extends MainModel {
 
     }
 
+    /**
+     * @param int $id
+     * @return mixed
+     */
+    public function getCategory($id = 0) {
+
+        $tbl = $this->selectColumns(array(
+            'id' => 'self.id',
+            'name' => 'self.name',
+            'file' => 'self.file',
+        ))
+            ->where('self.id', (int) $id)
+            ->execute();
+
+        return $tbl->fetchOne();
+
+    }
+
 } 

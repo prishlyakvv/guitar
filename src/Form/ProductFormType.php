@@ -29,10 +29,7 @@ class ProductFormType extends MainFormType {
         );
 
         $form->addText('name', 'Название', '', true, $validOpt);
-        $validOpt = array(
-            MainValidator::NOT_EMPTY => array(),
-        );
-        $form->addText('cat_id', 'Категория', '', true, $validOpt);
+
         $form->addText('file', 'Файл', '', true, array());
 
         $form->addSubmit('pr_s', 'Отправить');

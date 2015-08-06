@@ -39,11 +39,21 @@ class CategoryBackendController extends MainBackendController {
 
     public function categoryAction() {
 
+        $catId = (int) $this->getRequestParam('id', 0);
+
+        $categoriesTbl = new Category($this->getApp());
+        $cat = $categoriesTbl->getCategory($catId);
+
+        if (!$cat) {
+            $this->notFound();
+        }
+
+
         $componentMenu = new TopMenuComponent($this);
         $componentMenuResp = $componentMenu->toString();
 
-        $categoriesTbl = new Category($this->getApp());
-        $cats = $categoriesTbl->getAllCategories();
+
+
 
         if ($_POST && isset($_POST['remove'])) {
             if ($categoriesTbl->removeCategories($_POST['remove'])) {
@@ -59,6 +69,7 @@ class CategoryBackendController extends MainBackendController {
 
         $form = new ProductFormType($this->getApp(), $this);
 
+        $form->fill($cat);
         if ($_POST) {
             if ($form->fillAndIsValid()) {
 
