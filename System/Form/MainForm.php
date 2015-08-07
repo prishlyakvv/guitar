@@ -5,6 +5,7 @@ namespace System\Form;
 use System\Form\Fields\Submit;
 use System\Form\Fields\Text;
 use System\Form\Fields\Textarea;
+use System\Form\Fields\Hidden;
 
 class MainForm {
 
@@ -62,6 +63,25 @@ class MainForm {
         $el->setValue($value);
         $el->setRequire($require);
         $el->setValidateOpts($paramValidate);
+
+        $this->addElement($el);
+
+        return $this;
+
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     * @return $this
+     */
+    public function addHidden($name, $value) {
+
+        $this->checkName($name);
+
+        $el = new Hidden();
+        $el->setName($name);
+        $el->setValue($value);
 
         $this->addElement($el);
 

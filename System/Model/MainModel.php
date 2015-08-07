@@ -5,10 +5,11 @@ namespace System\Model;
 use PDO;
 use System\Lib\SmallLibs;
 
-class MainModel {
+abstract class MainModel implements ModelInterface {
 
     protected $_tbl = '';
     protected $_tblAlias = 'self';
+    protected $_pk = 'id';
 
     const JOIN_TYPE = 'JOIN';
     const JOIN_TYPE_LEFT = 'LEFT JOIN';
@@ -54,6 +55,11 @@ class MainModel {
         $this->_pdo = new PDO($dsn, $configDB['database_user'], $configDB['database_password'], $opt);
 
     }
+
+    /**
+     * @return mixed
+     */
+    public abstract function getColumns();
 
     /**
      * @return \System\App
@@ -338,5 +344,125 @@ class MainModel {
         echo 'Ошибка в запросе: <hr> <pre>' . $this->_srcQuery . '</pre><hr>';
         echo 'Трейс: <hr> <pre>' . (string) $ex . '</pre><hr>';
     }
+
+    /**
+     * @return string
+     */
+    public function getPk()
+    {
+        return $this->_pk;
+    }
+
+    /**
+     * @param string $pk
+     */
+    public function setPk($pk)
+    {
+        $this->_pk = $pk;
+    }
+
+
+    /**
+     * Выполняется перед вставкой.
+     * Содержит параметры иницатора
+     *
+     * @param $data
+     * @param $pk
+     */
+    protected function preInsert(&$data, $pk) {}
+
+    public function insert($data = array(), $pk = 'id') {
+
+        $this->preInsert($data, $pk);
+
+        try {
+
+            $params = array();
+            foreach($data as $key => $val) {
+
+                if (empty($data[$key])) {
+                    unset($data[$key]);
+                    continue;
+                }
+
+                $params[':' . $key] = $val;
+            }
+
+            $keys = array_keys($data);
+            $colsStr = implode(', ', $keys);
+            $valStr = ':' . implode(', :', $keys);
+
+            $this->_srcQuery = "INSERT INTO {$this->_tbl} ({$colsStr}) VALUES ({$valStr})";
+
+            $stmt = $this->_pdo->prepare($this->_srcQuery);
+
+            $res = $stmt->execute($params);
+            if ($res) {
+                $res = $this->_pdo->lastInsertId($pk);
+            }
+
+            $this->postInsert($res);
+            return $res;
+
+        } catch(\Exception $ex) {
+            $this->logExcept($ex);
+            return false;
+        }
+
+    }
+
+
+    /**
+     * Выполняется после вставки
+     * Содержит результат
+     *
+     * @param $res
+     */
+    protected function postInsert($res) {}
+
+    /**
+     * @param $data
+     * @param $where
+     */
+    protected function preUpdate(&$data, &$where) {}
+
+    public function update($data = array(), $where = array()) {
+
+        $this->preUpdate($data, $where);
+
+        try {
+
+            if (isset($data[$this->getPk()])) {
+                unset($data[$this->getPk()]);
+            }
+            $keys = array_keys($data);
+            $colsSet = implode('=?, ', $keys) . '=? ';
+            $colsWhere = implode('=?, ', array_keys($where)) . '=? ';
+
+            $this->_srcQuery = "UPDATE {$this->_tbl} SET {$colsSet} WHERE {$colsWhere}";
+            $stmt = $this->_pdo->prepare($this->_srcQuery);
+
+            $params = array_values(array_merge($data, $where));
+            $res = $stmt->execute($params);
+
+            $this->postUpdate($res);
+            return $res;
+
+        } catch(\Exception $ex) {
+            $this->logExcept($ex);
+            return false;
+        }
+
+    }
+
+
+
+    /**
+     * Выполняется после вставки
+     * Содержит результат
+     *
+     * @param $res
+     */
+    protected function postUpdate($res) {}
 
 } 

@@ -8,6 +8,21 @@ class Product extends MainModel {
 
     protected $_tbl = 'product';
 
+    public function getColumns() {
+
+        return array(
+            'name' => array(
+                'type' => 'varchar',
+                'typeLength' => 255,
+            ),
+            'file' => array(
+                'type' => 'varchar',
+                'typeLength' => 255,
+            ),
+        );
+
+    }
+
     /**
      * @return mixed
      */

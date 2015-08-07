@@ -8,6 +8,27 @@ class Category extends MainModel {
 
     protected $_tbl = 'category';
 
+    public function getColumns() {
+
+        return array(
+            'id' => array(
+                'type' => 'int',
+                'notNull' => true,
+                'ai' => true,
+                'pk' => true,
+            ),
+            'name' => array(
+                'type' => 'varchar',
+                'typeLength' => 255,
+            ),
+            'file' => array(
+                'type' => 'varchar',
+                'typeLength' => 255,
+            ),
+        );
+
+    }
+
     /**
      * @return mixed
      */

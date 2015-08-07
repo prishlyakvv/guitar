@@ -4,6 +4,12 @@
 
         {% for field in fields %}
 
+            {% if field.htmlTag == 'input_hidden' %}
+            <div class="hidden">
+                <input type="hidden" name="{{ field.name }}" value="{{ field.value }}" id="{{ loop.parent.name }}_{{ field.name }}">
+            </div>
+            {% endif %}
+
             {% if field.htmlTag == 'input_text' %}
                 <div>
                     {% if field.error %}

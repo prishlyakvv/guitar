@@ -5,7 +5,7 @@ namespace src\Controllers\Backend;
 use src\Controllers\Backend\Component\TopMenuComponent;
 use src\Models\Category;
 use src\Controllers\Backend\Component\NotifyComponent;
-use src\Form\ProductFormType;
+use src\Form\CategoryFormType;
 
 class CategoryBackendController extends MainBackendController {
 
@@ -48,12 +48,8 @@ class CategoryBackendController extends MainBackendController {
             $this->notFound();
         }
 
-
         $componentMenu = new TopMenuComponent($this);
         $componentMenuResp = $componentMenu->toString();
-
-
-
 
         if ($_POST && isset($_POST['remove'])) {
             if ($categoriesTbl->removeCategories($_POST['remove'])) {
@@ -67,12 +63,17 @@ class CategoryBackendController extends MainBackendController {
         $componentNotify = new NotifyComponent($this);
         $componentNotifyResp = $componentNotify->toString();
 
-        $form = new ProductFormType($this->getApp(), $this);
+        $form = new CategoryFormType($this->getApp(), $this);
 
         $form->fill($cat);
         if ($_POST) {
             if ($form->fillAndIsValid()) {
-
+                if ($idNew = $form->save()) {
+                    if ($idNew === true) {
+                        $idNew = $catId;
+                    }
+                    $this->redirect('backend_category', array('id'=>$idNew));
+                }
             }
         }
 
