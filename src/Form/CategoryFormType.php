@@ -35,7 +35,6 @@ class CategoryFormType extends MainFormType {
 
         $tblCat = new Category($this->getApp());
         $categories = $tblCat->getAllCategoriesForFilter();
-//        var_dump($categories);die;
         $form->addSelect('parent_category', 'Родительская категория', '0', $categories);
 
         $form->addText('number_sort', 'Порядок сортировки', '0', true, array());
