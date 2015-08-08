@@ -15,6 +15,17 @@ class ProductBackendController extends MainBackendController {
         $componentResp = $component->toString();
 
         $productTbl = new Product($this->getApp());
+
+        if ($_POST && isset($_POST['remove'])) {
+            if ($productTbl->removeProducts($_POST['remove'])) {
+                $this->addNotify('Успешно удалено');
+            } else {
+                $this->addNotify('Удаление не выполнено');
+            }
+            $this->redirect('backend_products');
+        }
+
+
         $products = $productTbl->getAllProducts();
 
         $componentNotify = new NotifyComponent($this);

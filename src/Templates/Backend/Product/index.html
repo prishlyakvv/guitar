@@ -33,7 +33,7 @@
             <td>{{ product.name|e }}</td>
             <td>{{ product.date_create }}</td>
             <td>{{ product.date_modifed }}</td>
-            <td><input type="checkbox" name="remove" value="{{ product.id }}"></td>
+            <td><input type="checkbox" name="remove[]" value="{{ product.id }}"></td>
             <td><a href="/admin/product/?id={{ product.id }}">Редактировать</a>
         </tr>
         {% endfor %}

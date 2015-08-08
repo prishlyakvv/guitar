@@ -102,5 +102,15 @@ class Product extends MainModel {
 
     }
 
+    /**
+     * @param array $ids
+     * @return bool
+     */
+    public function removeProducts($ids = array()) {
+
+        return $this->delete($ids);
+
+    }
+
 
 } 
