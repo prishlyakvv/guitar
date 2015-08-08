@@ -6,6 +6,7 @@ use System\Form\Fields\Submit;
 use System\Form\Fields\Text;
 use System\Form\Fields\Textarea;
 use System\Form\Fields\Hidden;
+use System\Form\Fields\Select;
 
 class MainForm {
 
@@ -113,6 +114,23 @@ class MainForm {
         return $this;
 
     }
+
+    public function addSelect($name, $label, $value, $data) {
+
+        $this->checkName($name);
+
+        $el = new Select();
+        $el->setName($name);
+        $el->setLabel($label);
+        $el->setValue($value);
+        $el->setData($data);
+
+        $this->addElement($el);
+
+        return $this;
+
+    }
+
 
     /**
      * @param $name

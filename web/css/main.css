@@ -1,0 +1,31 @@
+.confirm-submit-popap{
+    position: fixed;
+    top: 90px;
+    left: 10%;
+    background: #fff;
+    border: 1px solid black;
+    width: 500px;
+    height: 300px;
+}
+.confirm-submit-popap .buttons {
+    bottom: 0;
+    position: absolute;
+    left: 30%;
+    width: 300px;
+}
+.confirm-submit-popap .buttons button{
+    margin: 10px;
+    width: 75px;
+    padding: 5px;
+    background: #eef;
+}
+.confirm-submit-popap .message {
+    width: 90%;
+    margin: 30px auto;
+    border: 1px solid;
+    border-radius: 7px;
+    min-height: 204px;
+    padding: 5px;
+    text-align: center;
+    background: #fdd;
+}

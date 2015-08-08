@@ -25,6 +25,12 @@ class Category extends MainModel {
                 'type' => 'varchar',
                 'typeLength' => 255,
             ),
+            'parent_category' => array(
+                'type' => 'int',
+            ),
+            'number_sort' => array(
+                'type' => 'int',
+            ),
         );
 
     }
@@ -38,11 +44,33 @@ class Category extends MainModel {
                 'id' => 'self.id',
                 'name' => 'self.name',
                 'file' => 'self.file',
+                'parent_category' => 'self.parent_category',
+                'number_sort' => 'self.number_sort',
             ))
             ->order('self.id ASC')
             ->execute();
 
         $categories = $tbl->fetchAll();
+
+        return (array) $categories;
+
+    }
+
+    public function getAllCategoriesForFilter() {
+
+        $tbl = $this->selectColumns(array(
+            'id' => 'self.id',
+            'name' => 'self.name',
+        ))
+            ->order('self.name ASC')
+            ->execute();
+
+        $categories = $tbl->fetchAll();
+
+//        $catsAssoc =
+//        foreach ($categories as $category) {
+//
+//        }
 
         return (array) $categories;
 
@@ -60,6 +88,8 @@ class Category extends MainModel {
                 'cat_id' => 'self.id',
                 'cat_name' => 'self.name',
                 'cat_file' => 'self.file',
+                'cat_parent_category' => 'self.parent_category',
+                'cat_number_sort' => 'self.number_sort',
                 'id' => 'product.id',
                 'name' => 'product.name',
                 'file' => 'product.file',
@@ -93,6 +123,9 @@ class Category extends MainModel {
             'id' => 'self.id',
             'name' => 'self.name',
             'file' => 'self.file',
+            'parent_category' => 'self.parent_category',
+            'number_sort' => 'self.number_sort',
+
         ))
             ->where('self.id', (int) $id)
             ->execute();

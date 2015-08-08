@@ -1,7 +1,7 @@
 db_parameters:
     database_type: 12345
     database_host: localhost
-    database_name: test
+    database_name: test_prishlyak
     database_user: root
     database_password: 123456
     database_encoding: utf8

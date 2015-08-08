@@ -3,18 +3,24 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-    {% block css %}{% endblock %}
+    {% block css %}
+        <link href="/css/main.css" rel="stylesheet" type="text/css">
+    {% endblock %}
 </head>
 <body>
-
-<header>{% block header %}{% endblock %}</header>
-<nav>{% block menu %}{% endblock %}</nav>
-<article>
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
-</article>
-<footer>{% block footer %}<h2>Тестовое задание</h2>{% endblock %}</footer>
-
+    <header>{% block header %}{% endblock %}</header>
+    <nav>{% block menu %}{% endblock %}</nav>
+    <article>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+        <div id="popaps"></div>
+    </article>
+    <footer>{% block footer %}<h2>Тестовое задание</h2>{% endblock %}</footer>
+    {% block js %}
+        <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.tmpl.min.js"></script>
+        <script type="text/javascript" src="/js/main.js"></script>
+    {% endblock %}
 </body>
 </html>
