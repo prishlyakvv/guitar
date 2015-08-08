@@ -47,3 +47,8 @@ table.list {
 table.list td{
     border: 1px solid black;
 }
+
+.form .row {margin-top: 10px;}
+.form .file_row {border: 1px solid black; padding: 5px;}
+.form .preview {width: 50px;}
+.form .preview img {width: 100%;}

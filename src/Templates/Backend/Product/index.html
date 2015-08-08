@@ -21,7 +21,8 @@
         <tr>
             <td>id</td>
             <td>Название</td>
-            <td>Фото</td>
+            <td>Дата создания</td>
+            <td>Дата изменения</td>
             <td>Удалить</td>
             <td>&nbsp;</td>
         </tr>
@@ -30,14 +31,16 @@
         <tr>
             <td>{{ product.id }}</td>
             <td>{{ product.name|e }}</td>
-            <td>{{ product.file }}</td>
-            <td><input type="checkbox" name="remove" value="{{ category.id }}"></td>
-            <td><a href="/admin/category/?id={{ category.id }}">Редактировать</a>
+            <td>{{ product.date_create }}</td>
+            <td>{{ product.date_modifed }}</td>
+            <td><input type="checkbox" name="remove" value="{{ product.id }}"></td>
+            <td><a href="/admin/product/?id={{ product.id }}">Редактировать</a>
         </tr>
         {% endfor %}
 
         <tr>
             <td colspan="5"><input type="submit"></td>
+            <td><a href="/admin/product/?id=0">Добавить</a></td>
         </tr>
 
     </table>

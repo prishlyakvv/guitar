@@ -445,6 +445,10 @@ abstract class MainModel implements ModelInterface {
             $params = array_values(array_merge($data, $where));
             $res = $stmt->execute($params);
 
+            if ($res) {
+                $res = $data;
+            }
+
             $this->postUpdate($res);
             return $res;
 

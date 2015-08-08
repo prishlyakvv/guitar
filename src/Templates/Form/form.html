@@ -1,5 +1,5 @@
 <div class="form">
-    <form action="{{ action }}" method="{{ method }}" name="{{ name }}">
+    <form action="{{ action }}" method="{{ method }}" name="{{ name }}" {% if multipart == true %}enctype="multipart/form-data"{% endif %}>
 
 
         {% for field in fields %}
@@ -11,7 +11,7 @@
             {% endif %}
 
             {% if field.htmlTag == 'select' %}
-            <div>
+            <div class="row">
                 <div>
                     <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
                 </div>
@@ -25,8 +25,19 @@
             </div>
             {% endif %}
 
-            {% if field.htmlTag == 'input_text' %}
+            {% if field.htmlTag == 'checkbox' %}
+            <div class="row">
                 <div>
+                    <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="{{ field.name }}" value="1" id="{{ loop.parent.name }}_{{ field.name }}" {% if field.value %}checked="checked"{% endif %}>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if field.htmlTag == 'input_text' %}
+                <div class="row">
                     {% if field.error %}
                         <div class="error">{{ field.error|raw }}</div>
                     {% endif %}
@@ -39,8 +50,26 @@
                 </div>
             {% endif %}
 
-            {% if field.htmlTag == 'textarea' %}
+            {% if field.htmlTag == 'input_file' %}
+            <div class="row file_row">
+                {% if field.error %}
+                <div class="error">{{ field.error|raw }}</div>
+                {% endif %}
                 <div>
+                    <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
+                </div>
+                <div>
+                    <input type="file" name="{{ field.name }}" id="{{ loop.parent.name }}_{{ field.name }}">
+                    <input type="hidden" name="{{ field.name }}_old" value="{{ field.value }}" id="{{ loop.parent.name }}_{{ field.name }}_old">
+                </div>
+                {% if field.value %}
+                    <div class="preview"><img src="{{ field.value }}?cache={{ date().timestamp }}"></div>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            {% if field.htmlTag == 'textarea' %}
+                <div class="row">
                     {% if field.error %}
                         <div class="error">{{ field.error|raw }}</div>
                     {% endif %}
@@ -54,7 +83,7 @@
             {% endif %}
 
             {% if field.htmlTag == 'input_submit' %}
-                <div>
+                <div class="row">
                     <input type="submit" name="{{ field.name }}" value="{{ field.value }}" id="{{ loop.parent.name }}_{{ field.name }}">
                 </div>
             {% endif %}

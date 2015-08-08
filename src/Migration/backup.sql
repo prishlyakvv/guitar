@@ -68,7 +68,7 @@ DELIMITER ;
 --
 
 CREATE TABLE IF NOT EXISTS `product` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -85,23 +85,23 @@ CREATE TABLE IF NOT EXISTS `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `date_modifed`, `file`, `visible`, `isset`, `description`)
-  VALUES(1, 'Магнитофон тест1', 100, 1, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/upload/product/1.jpg', 1, 1, 'Какой то текст описания ');
+  VALUES(1, 'Магнитофон тест1', 100, 1, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/1.png', 1, 1, 'Какой то текст описания ');
 INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `date_modifed`, `file`, `visible`, `isset`, `description`)
-  VALUES(2, 'Магнитофон тест2', 11, 1, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/upload/product/2.jpg', 1, 1, 'Какой то текст описания 2 ');
+  VALUES(2, 'Магнитофон тест2', 11, 1, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/2.png', 1, 1, 'Какой то текст описания 2 ');
 INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `date_modifed`, `file`, `visible`, `isset`, `description`)
-  VALUES(3, 'Телевизор тест1', 123, 2, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/upload/product/3.jpg', 1, 1, 'Какой то текст описания ');
+  VALUES(3, 'Телевизор тест1', 123, 2, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/3.png', 1, 1, 'Какой то текст описания ');
 INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `date_modifed`, `file`, `visible`, `isset`, `description`)
-  VALUES(4, 'Кассета тест1', 3000, 3, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/upload/product/4.jpg', 1, 1, 'Какой то текст описания ');
+  VALUES(4, 'Кассета тест1', 3000, 3, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/4.png', 1, 1, 'Какой то текст описания ');
 INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `date_modifed`, `file`, `visible`, `isset`, `description`)
-  VALUES(5, 'Кассета тест2', 25, 3, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/upload/product/5.jpg', 1, 1, 'Какой то текст описания ');
+  VALUES(5, 'Кассета тест2', 25, 3, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/5.png', 1, 1, 'Какой то текст описания ');
 INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `date_modifed`, `file`, `visible`, `isset`, `description`)
-  VALUES(6, 'Диск1', 55, 4, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/upload/product/6.jpg', 1, 1, 'Какой то текст описания ');
+  VALUES(6, 'Диск1', 55, 4, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/6.png', 1, 1, 'Какой то текст описания ');
 INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `date_modifed`, `file`, `visible`, `isset`, `description`)
-  VALUES(7, 'Кассета тест11', 77, 5, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/upload/product/7.jpg', 1, 1, 'Какой то текст описания ');
+  VALUES(7, 'Кассета тест11', 77, 5, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/7.png', 1, 1, 'Какой то текст описания ');
 INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `date_modifed`, `file`, `visible`, `isset`, `description`)
-  VALUES(8, 'Кассета тест12', 78, 5, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/upload/product/8.jpg', 1, 1, 'Какой то текст описания ');
+  VALUES(8, 'Кассета тест12', 78, 5, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/8.png', 1, 1, 'Какой то текст описания ');
 INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `date_modifed`, `file`, `visible`, `isset`, `description`)
-  VALUES(9, 'Кассета тест13', 99, 6, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/upload/product/9.jpg', 1, 1, 'Какой то текст описания ');
+  VALUES(9, 'Кассета тест13', 99, 6, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/9.png', 1, 1, 'Какой то текст описания ');
 
 
 --

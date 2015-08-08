@@ -11,13 +11,39 @@ class Product extends MainModel {
     public function getColumns() {
 
         return array(
+            'id' => array(
+                'type' => 'int',
+                'notNull' => true,
+                'ai' => true,
+                'pk' => true,
+            ),
             'name' => array(
                 'type' => 'varchar',
-                'typeLength' => 255,
+            ),
+            'price' => array(
+                'type' => 'int',
+            ),
+            'category_id' => array(
+                'type' => 'int',
+            ),
+            'date_create' => array(
+                'type' => 'datetime',
+            ),
+            'date_modifed' => array(
+                'type' => 'datetime',
             ),
             'file' => array(
                 'type' => 'varchar',
                 'typeLength' => 255,
+            ),
+            'visible' => array(
+                'type' => 'tinyint',
+            ),
+            'isset' => array(
+                'type' => 'tinyint',
+            ),
+            'description' => array(
+                'type' => 'text',
             ),
         );
 
@@ -32,6 +58,13 @@ class Product extends MainModel {
                 'id' => 'self.id',
                 'name' => 'self.name',
                 'file' => 'self.file',
+                'price' => 'self.price',
+                'category_id' => 'self.category_id',
+                'date_create' => 'self.date_create',
+                'date_modifed' => 'self.date_modifed',
+                'visible' => 'self.visible',
+                'isset' => 'self.isset',
+                'description' => 'self.description',
             ))
             ->order('self.id ASC')
             ->execute();
@@ -52,6 +85,13 @@ class Product extends MainModel {
                 'id' => 'self.id',
                 'name' => 'self.name',
                 'file' => 'self.file',
+                'price' => 'self.price',
+                'category_id' => 'self.category_id',
+                'date_create' => 'self.date_create',
+                'date_modifed' => 'self.date_modifed',
+                'visible' => 'self.visible',
+                'isset' => 'self.isset',
+                'description' => 'self.description',
             ))
             ->where('self.id', (int) $id)
             ->execute();

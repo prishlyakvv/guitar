@@ -2,11 +2,14 @@
 
 namespace System\Form;
 
+use System\Form\Fields\File;
 use System\Form\Fields\Submit;
 use System\Form\Fields\Text;
 use System\Form\Fields\Textarea;
 use System\Form\Fields\Hidden;
 use System\Form\Fields\Select;
+use System\Form\Fields\Bool;
+use System\Form\Validator\MainValidator;
 
 class MainForm {
 
@@ -18,6 +21,7 @@ class MainForm {
     private $_method = self::METHOD_GET;
     private $_name = 'form_';
     private $_templ = 'Form/form.html';
+    private $_multipart = false;
 
     /**
      * @var \System\App
@@ -33,6 +37,12 @@ class MainForm {
 
     }
 
+    /**
+     * Форма не должна иметь элименты с одним name
+     *
+     * @param $name
+     * @throws \Exception
+     */
     protected function checkName($name) {
 
         foreach($this->_elements as $element) {
@@ -66,6 +76,30 @@ class MainForm {
         $el->setValidateOpts($paramValidate);
 
         $this->addElement($el);
+
+        return $this;
+
+    }
+
+    /**
+     * @param $name
+     * @param $label
+     * @param $value
+     * @param $require
+     * @return $this
+     */
+    public function addFile($name, $label, $value, $require) {
+
+        $this->checkName($name);
+
+        $el = new File();
+        $el->setName($name);
+        $el->setLabel($label);
+        $el->setValue($value);
+        $el->setRequire($require);
+
+        $this->addElement($el);
+        $this->setMultipart(true);
 
         return $this;
 
@@ -115,6 +149,13 @@ class MainForm {
 
     }
 
+    /**
+     * @param $name
+     * @param $label
+     * @param $value
+     * @param $data
+     * @return $this
+     */
     public function addSelect($name, $label, $value, $data) {
 
         $this->checkName($name);
@@ -124,6 +165,27 @@ class MainForm {
         $el->setLabel($label);
         $el->setValue($value);
         $el->setData($data);
+
+        $this->addElement($el);
+
+        return $this;
+
+    }
+
+    /**
+     * @param $name
+     * @param $label
+     * @param $value
+     * @return $this
+     */
+    public function addBool($name, $label, $value) {
+
+        $this->checkName($name);
+
+        $el = new Bool();
+        $el->setName($name);
+        $el->setLabel($label);
+        $el->setValue($value);
 
         $this->addElement($el);
 
@@ -152,6 +214,9 @@ class MainForm {
 
     }
 
+    /**
+     * @return string
+     */
     public function render() {
 
         $data = array(
@@ -159,6 +224,7 @@ class MainForm {
             'method' => $this->getMethod(),
             'name' => $this->getName(),
             'fields' => $this->getElements(),
+            'multipart' => $this->getMultipart(),
         );
 
         $res = $this->renderTmpl($data, $this->getTempl());
@@ -259,11 +325,30 @@ class MainForm {
     }
 
     /**
-     * @param $element
+     * @param $element \System\Form\Fields\MainField
      */
     public function addElement($element)
     {
+        if (method_exists($element,'getRequire') && $element->getRequire() && method_exists($element,'addValidateOpt')) {
+            $element->addValidateOpt(MainValidator::NOT_EMPTY, true);
+        }
         $this->_elements[] = $element;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getMultipart()
+    {
+        return $this->_multipart;
+    }
+
+    /**
+     * @param boolean $multipart
+     */
+    public function setMultipart($multipart)
+    {
+        $this->_multipart = $multipart;
     }
 
 } 

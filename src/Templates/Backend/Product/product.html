@@ -1,0 +1,16 @@
+{% extends "baseBackend.html" %}
+
+{% block title %}Продукт. Админка{% endblock %}
+
+{% block header %}
+    <h1>Продукт. Админка</h1>
+    {{ componentNotify|raw }}
+{% endblock %}
+
+{% block menu %}
+    {{ componentMenu|raw }}
+{% endblock %}
+
+{% block content %}
+    {{ form|raw }}
+{% endblock %}

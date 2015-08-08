@@ -67,11 +67,6 @@ class Category extends MainModel {
 
         $categories = $tbl->fetchAll();
 
-//        $catsAssoc =
-//        foreach ($categories as $category) {
-//
-//        }
-
         return (array) $categories;
 
     }

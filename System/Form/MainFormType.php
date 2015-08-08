@@ -120,8 +120,14 @@ class MainFormType {
             }
 
             $htmlTag = $element->getHtmlTag();
+            $elName = $element->getName();
+
+            if ($htmlTag == 'input_file' && !empty($_FILES[$elName]['name'])) {
+                continue;
+            }
+
             if ($htmlTag != 'input_submit') {
-                $elName = $element->getName();
+
                 $elLabel = (method_exists($element, 'getLabel')) ? $element->getLabel() : '';
                 $elValue = $element->getValue();
                 $elParamsValidate = $element->getValidateOpt();
@@ -233,13 +239,17 @@ class MainFormType {
     }
 
     public function save() {
-        if (!$this->isValid() || !$this->getDataClass() || !$this->getData()) {
+
+        $data = $this->getData();
+
+        $this->preSave($data);
+
+        if (!$this->isValid() || !$this->getDataClass() || !$data) {
             throw new \Exception('Для сохранения данных в бд форма должна быть валидной, заполненой и нужно указать класс данных');
         }
 
         $class = $this->getDataClass();
         $columns = $class->getColumns();
-        $data = $this->getData();
         $pk = $class->getPk();
 
         if (!isset($columns[$pk])) {
@@ -263,9 +273,15 @@ class MainFormType {
             }
         }
 
+        $this->postSave($return);
+
        return $return;
 
     }
+
+    protected function preSave($data) {}
+
+    protected function postSave($result) {}
 
     /**
      * @return array

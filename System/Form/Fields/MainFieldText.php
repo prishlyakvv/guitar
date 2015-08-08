@@ -54,11 +54,12 @@ abstract class MainFieldText extends MainField{
     }
 
     /**
+     * @param $key
      * @param $validateOpt
      */
-    public function addValidateOpt($validateOpt)
+    public function addValidateOpt($key, $validateOpt)
     {
-        $this->_validateOpt[] = $validateOpt;
+        $this->_validateOpt[$key] = $validateOpt;
     }
 
     /**

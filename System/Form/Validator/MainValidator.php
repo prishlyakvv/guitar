@@ -9,6 +9,7 @@ class MainValidator {
     const NOT_EMPTY = 'notEmpty';
     const LENGTH_MAX = 'lengthMax';
     const LENGTH_MIN = 'lengthMin';
+    const IS_INTEGER = 'isInteger';
 
     protected $_error = '';
 
@@ -54,7 +55,7 @@ class MainValidator {
 
         $message = 'Значение не может быть пустым';
 
-        if (empty($value)) {
+        if (empty($value) && $value !== '0' && $value !== 0) {
             return isset($attr['message']) ? $attr['message'] : $message;
         }
 
@@ -85,6 +86,17 @@ class MainValidator {
         $message = 'Слишком маленькое значение';
 
         if (strlen((string) $value) < $attr['min']) {
+            return isset($attr['message']) ? $attr['message'] : $message;
+        }
+
+        return true;
+    }
+
+    protected function isIntegerConstr($value, $attr = array()) {
+
+        $message = 'Значение должно приводиться к целому числу';
+
+        if (!empty($value) && !is_numeric($value) && !is_int($value)) {
             return isset($attr['message']) ? $attr['message'] : $message;
         }
 

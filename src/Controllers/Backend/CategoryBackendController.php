@@ -69,7 +69,7 @@ class CategoryBackendController extends MainBackendController {
         if ($_POST) {
             if ($form->fillAndIsValid()) {
                 if ($idNew = $form->save()) {
-                    if ($idNew === true) {
+                    if (is_array($idNew)) {
                         $idNew = $catId;
                     }
                     $this->redirect('backend_category', array('id'=>$idNew));

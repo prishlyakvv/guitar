@@ -16,6 +16,8 @@ final class App {
      */
     protected $_templater;
 
+    protected $_currDir = '';
+
     /**
      * @var Router
      */
@@ -43,6 +45,7 @@ final class App {
         $this->_templater = new Twig($this);
         $this->_router = new Router($this);
         $this->loadConfig();
+        $this->_currDir = __DIR__ . '/..';
     }
 
     /**
@@ -138,6 +141,14 @@ final class App {
      */
     public function getSession() {
         return $this->_session;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrDir()
+    {
+        return $this->_currDir;
     }
 
 }
