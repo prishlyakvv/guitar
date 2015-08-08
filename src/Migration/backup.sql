@@ -32,12 +32,12 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- Дамп данных таблицы `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(1, 'Магнитофоны', '/upload/category/1.jpg', 0, 1);
-INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(2, 'Телевизоры', '/upload/category/2.jpg', 0, 2);
-INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(3, 'Кассеты', '/upload/category/3.jpg', 1, 4);
-INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(4, 'Диски', '/upload/category/4.jpg', 0, 3);
-INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(5, 'Sony', '/upload/category/5.jpg', 3, 5);
-INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(6, 'Philips', '/upload/category/6.jpg', 3, 6);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(1, 'Магнитофоны', '/img/uploaded/category/1.png', 0, 1);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(2, 'Телевизоры', '/img/uploaded/category/2.png', 0, 2);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(3, 'Кассеты', '/img/uploaded/category/3.png', 1, 4);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(4, 'Диски', '/img/uploaded/category/4.png', 0, 3);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(5, 'Sony', '/img/uploaded/category/5.png', 3, 5);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(6, 'Philips', '/img/uploaded/category/6.png', 3, 6);
 
 
 --

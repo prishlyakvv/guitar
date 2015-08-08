@@ -12,9 +12,23 @@
 
 {% block content %}
     <div class="categories">
+        {% for category in categories %}
+        <div class="item">
+            <div class="type category">Категория</div>
+            <div class="photo"><img src="{{category.file}}"></div>
+            <div>
+                <a href="/category/?id={{ category.id }}">{{category.name}}</a>
+            </div>
+        </div>
+        {% endfor %}
+
         {% for product in products %}
-        <div class="category">
-            <strong>{{product.id}}</strong>. "<em>{{product.name}}"</em> - {{product.file}}
+        <div class="item">
+            <div class="type product">Продукт</div>
+            <div class="photo"><img src="{{product.file}}"></div>
+            <div>
+                <a href="/product/?id={{ product.id }}">{{product.name}}</a>
+            </div>
         </div>
         {% endfor %}
     </div>

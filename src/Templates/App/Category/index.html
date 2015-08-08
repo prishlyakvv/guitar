@@ -14,8 +14,12 @@
 {% block content %}
     <div class="categories">
         {% for category in categories %}
-        <div class="category">
-            <strong>{{category.id}}</strong>. "<em>{{category.name}}"</em> - {{category.file}}
+        <div class="item">
+            <div class="type category">Категория</div>
+            <div class="photo"><img src="{{category.file}}"></div>
+            <div>
+                <a href="/category/?id={{ category.id }}">{{category.name}}</a>
+            </div>
         </div>
         {% endfor %}
     </div>

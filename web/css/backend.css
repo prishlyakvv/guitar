@@ -39,7 +39,7 @@ footer {
 table.list {
     width: 800px;
     border: 1px solid black;
-
+    text-align: center;
     border-collapse: separate;
     border-spacing: 0;
 }
@@ -52,3 +52,4 @@ table.list td{
 .form .file_row {border: 1px solid black; padding: 5px;}
 .form .preview {width: 50px;}
 .form .preview img {width: 100%;}
+.form .preview_img {width: 50px; height: 50px;}

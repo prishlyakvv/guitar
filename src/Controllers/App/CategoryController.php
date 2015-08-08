@@ -11,7 +11,7 @@ class CategoryController extends MainController {
     public function indexAction() {
 
         $catTbl = new Category($this->getApp());
-        $categories = $catTbl->getAllCategories();
+        $categories = $catTbl->getAllThisLevelCategories();
 
         $componentMenu = new TopMenuComponent($this);
         $componentMenuResp = $componentMenu->toString();
@@ -28,6 +28,9 @@ class CategoryController extends MainController {
         $catId = (int) $this->getRequestParam('id', 0);
 
         $catTbl = new Category($this->getApp());
+        $categories = $catTbl->getAllThisLevelCategories($catId);
+
+        $catTbl = new Category($this->getApp());
         $products = $catTbl->getProductsFromCategory($catId);
 
         if (!$products) {
@@ -38,6 +41,7 @@ class CategoryController extends MainController {
         $componentMenuResp = $componentMenu->toString();
 
         $this->render(array(
+            'categories' => $categories,
             'products' => $products,
             'leftMenu' => $componentMenuResp,
         ), 'App/Category/products.html');

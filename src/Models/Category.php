@@ -56,6 +56,31 @@ class Category extends MainModel {
 
     }
 
+    public function getAllThisLevelCategories($id = 0) {
+
+        $tbl = $this->selectColumns(array(
+            'id' => 'self.id',
+            'name' => 'self.name',
+            'file' => 'self.file',
+            'parent_category' => 'self.parent_category',
+            'number_sort' => 'self.number_sort',
+        ))
+            ->order('self.id ASC');
+
+        if ($id) {
+            $tbl->where('self.parent_category', (int) $id);
+        } else {
+            $tbl->where('self.parent_category', 0);
+        }
+
+        $categories = $tbl->execute()->fetchAll();
+
+        return (array) $categories;
+
+    }
+
+
+
     public function getAllCategoriesForFilter() {
 
         $tbl = $this->selectColumns(array(

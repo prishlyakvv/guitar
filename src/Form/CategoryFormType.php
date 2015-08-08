@@ -31,7 +31,7 @@ class CategoryFormType extends MainFormType {
 
         $form->addText('name', 'Название', '', true, $validOpt);
 
-        $form->addText('file', 'Файл', '', true, array());
+        $form->addFile('file', 'Изображение', '', true);
 
         $tblCat = new Category($this->getApp());
         $categories = $tblCat->getAllCategoriesForFilter();
@@ -47,6 +47,67 @@ class CategoryFormType extends MainFormType {
 
     protected function setDefaults() {
         $this->setDataClass(new Category($this->getApp()));
+    }
+
+
+    /**
+     * todo - добавить проверки и исключения
+     * todo - вывести пути в конфиги
+     *
+     * @param $result
+     * @throws \Exception
+     */
+    protected function postSave($result) {
+
+        if (is_array($result)) {
+            $data = $this->getData();
+            $id = $data['id'];
+        } elseif ($result) {
+            $id = (int) $result;
+        } else {
+            $id = 0;
+        }
+
+
+        if (!empty($_FILES['file']['name']) && $id) {
+            $prefix = '/img/uploaded/category/';
+            $uploaddir = $this->getApp()->getCurrDir() . '/web' . $prefix;
+            $info = new \SplFileInfo($_FILES['file']['name']);
+            $fileExtension = $info->getExtension();
+            $uploadfile = $uploaddir . $id . '.' . $fileExtension;
+            $uploadfileDB = $prefix . $id . '.' . $fileExtension;
+
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
+
+                $tbl = $this->getDataClass();
+                $tbl->update(array('file'=>$uploadfileDB), array('id'=>$id));
+
+            } else {
+
+                throw new \Exception('Ошибка при сохранении изображения');
+
+            }
+
+        }
+    }
+
+
+    protected function preSave(&$data) {
+
+        if (isset($_POST['file_old'])) {
+            $data['file'] = $_POST['file_old'];
+        }
+
+        if (!$data['id'] || empty($_FILES['file']['name']) || !$data['file']) {
+            return false;
+        }
+
+
+        $id = (int) $data['id'];
+        $file = $this->getApp()->getCurrDir() . '/web/img/uploaded/category/' . $id . '.*';
+
+        array_map('unlink', glob($file));
+
     }
 
 } 

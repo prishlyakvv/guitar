@@ -11,9 +11,54 @@
 {% endblock %}
 
 {% block content %}
+<div class="product_page">
+    <h2>{{product.name}}</h2>
+    <div class="img"><img src="{{product.file}}"></div>
+    <div class="info">
+        <!--'id' => 'self.id',-->
+        <!--'name' => 'self.name',-->
+        <!--'file' => 'self.file',-->
+        <!--'price' => 'self.price',-->
+        <!--'category_id' => 'self.category_id',-->
+        <!--'date_create' => 'self.date_create',-->
+        <!--'date_modifed' => 'self.date_modifed',-->
+        <!--'visible' => 'self.visible',-->
+        <!--'isset' => 'self.isset',-->
+        <!--'description' => 'self.description',-->
+        <h3>Информация</h3>
+        <table>
+            <tr>
+                <td>id</td>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <td>Цена</td>
+                <td>{{ product.price }}</td>
+            </tr>
+            <tr>
+                <td>Дата добавления</td>
+                <td>{{ product.date_create }}</td>
+            </tr>
+            <tr>
+                <td>Налисие на складе</td>
+                <td>
+                    {% if product.isset %}
+                        Присутствует
+                    {% else %}
+                        Отсутствует
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
 
-    {{product.id}}
-    {{product.name}}
-    {{product.file}}
+    <div class="description">
+        <h3>Описание</h3>
+
+        {{ product.description }}
+    </div>
+</div>
+
+
 
 {% endblock %}

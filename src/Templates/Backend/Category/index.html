@@ -14,7 +14,7 @@
 
 {% block content %}
 
-<form method="post">
+<form method="post" class="form">
     <table class="list">
         <tr>
             <td>id</td>
@@ -28,7 +28,7 @@
         <tr>
             <td>{{ category.id }}</td>
             <td>{{ category.name|e }}</td>
-            <td>{{ category.file }}</td>
+            <td><img src="{{ category.file }}" class="preview_img"></td>
             <td><input type="checkbox" name="remove[]" value="{{ category.id }}"></td>
             <td><a href="/admin/category/?id={{ category.id }}">Редактировать</a></td>
         </tr>

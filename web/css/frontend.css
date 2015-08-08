@@ -16,11 +16,11 @@ header {
 
 nav {
     float: left;
-    width: 10%;
+    width: 15%;
     background: #eee;
     min-height: 100px;
     margin-top: 10px;
-    padding: 12px;
+    padding: 1%;
 }
 
 nav ul{
@@ -29,14 +29,15 @@ nav ul{
 
 article {
     float: right;
-    width: 85%;
+    width: 82%;
 }
 
 article #content {
-    padding: 10px;
+    padding: 1%;
     min-height: 700px;
     background: #fff;
     width: 100%;
+    float: right;
 }
 
 footer {
@@ -51,3 +52,45 @@ footer {
 section#center {
     min-width: 1024px;
 }
+
+#content {
+    width: 500px;
+}
+
+
+.categories {
+    width: 730px;
+    padding: 30px;
+}
+.categories .item {
+    width: 201px;
+    float: left;
+    text-align: center;
+    border: 1px solid black;
+    margin: 10px;
+}
+.categories .type {
+    font-weight: bold;
+    padding: 5px;
+}
+.categories .type.product {
+    background: #5D9C45;
+}
+.categories .type.category {
+    background: #aaaaee;
+}
+
+.categories .photo {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}
+.categories .photo img{
+    width: 100%;
+}
+.categories .item a {color: black; font-weight: bold;}
+
+.product_page {width: 100%;}
+.product_page .img{width: 420px; float: left; padding: 15px;}
+.product_page img{width: 360px; }
+.product_page .description {clear: both}

@@ -14,7 +14,7 @@ class TopMenuComponent extends MainComponent {
     protected function run() {
 
         $catTbl = new Category($this->getApp());
-        $categories = $catTbl->getAllCategories();
+        $categories = $catTbl->getAllThisLevelCategories();
 
         return $this->render(array(
             'categories' => $categories,
