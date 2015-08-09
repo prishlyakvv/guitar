@@ -70,8 +70,8 @@ class Category extends MainModel {
             'file' => 'self.file',
             'parent_category' => 'self.parent_category',
             'number_sort' => 'self.number_sort',
-            'count_products' => 'count(product.id)',
-            'count_subcategories' => 'count(category_children.id)',
+            'count_products' => 'count(distinct(product.id))',
+            'count_subcategories' => 'count(distinct(category_children.id))',
         ))
             ->info('product', 'product', 'category_id', 'id', MainModel::JOIN_TYPE_LEFT)
             ->info('category', 'category_children', 'parent_category', 'id', MainModel::JOIN_TYPE_LEFT)
