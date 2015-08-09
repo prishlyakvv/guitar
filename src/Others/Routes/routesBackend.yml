@@ -2,6 +2,11 @@ backend_index:
     path:      /admin
     controller: src\Controllers\Backend\DefaultBackendController:indexAction
 
+#todo Быстрый фикс потом следует поправить
+backend_index_slash:
+    path:      /admin/
+    controller: src\Controllers\Backend\DefaultBackendController:indexAction
+
 backend_categories:
     path:      /admin/categories
     controller: src\Controllers\Backend\CategoryBackendController:indexAction
