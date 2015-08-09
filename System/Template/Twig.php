@@ -14,11 +14,17 @@ class Twig extends MainTemplate implements TemplateInterface {
 
     public function render($data, $template){
 
-        $loader = new Twig_Loader_Filesystem('../src/Templates');
+        $configTwig = $this->getApp()->getConfigParam('twig_params');
+
+        if (!isset($configTwig['cache_path']) || !isset($configTwig['templates_path'])) {
+            throw new \Exception('Неверные Параметры конфигурации twig');
+        }
+
+        $loader = new Twig_Loader_Filesystem($configTwig['templates_path']);
         $isProd = $this->getApp()->isProd();
 
         $this->_environment = new Twig_Environment($loader, array(
-            'cache'       => '../cache/template',
+            'cache'       => $configTwig['cache_path'],
             'auto_reload' => !$isProd,
             'debug' => !$isProd,
         ));

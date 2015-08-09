@@ -5,3 +5,7 @@ db_parameters:
     database_user: root
     database_password: 123456
     database_encoding: utf8
+
+twig_params:
+    cache_path: '../cache/template'
+    templates_path: '../src/Templates'

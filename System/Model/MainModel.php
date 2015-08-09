@@ -44,7 +44,7 @@ abstract class MainModel implements ModelInterface {
 
         $this->_app = $app;
 
-        $configDB = $this->_app->getConfigParam('db_parameters');
+        $configDB = $this->getApp()->getConfigParam('db_parameters');
 
         $dsn = "mysql:host={$configDB['database_host']};dbname={$configDB['database_name']};charset={$configDB['database_encoding']}";
         $opt = array(
