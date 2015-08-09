@@ -40,6 +40,7 @@ class MainController {
 
         foreach ($_REQUEST as $key => $val) {
             if (is_string($val)) {
+                //todo Поправить
                 $val = htmlspecialchars($val);
                 $this->_request[$key] = $val;
             }
