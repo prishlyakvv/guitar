@@ -1,3 +1,4 @@
+/*Подтверждение общий компонент*/
 .confirm-submit-popap{
     position: fixed;
     top: 90px;
@@ -28,4 +29,28 @@
     padding: 5px;
     text-align: center;
     background: #fdd;
+}
+
+
+/*Пагинатор общий компонент*/
+.paginator {
+    text-align: center;
+    height: 35px;
+    clear: both;
+    padding: 10px;
+}
+.paginator a{
+    color: black;
+    font-weight: bold;
+}
+.paginator .pager_content {
+    background: #aaeeee;
+    border-radius: 5px;
+    padding: 7px;
+}
+.paginator .page, .paginator .limit  {
+    padding-left: 10px;
+}
+.paginator .current {
+    color: red;
 }

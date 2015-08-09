@@ -13,6 +13,8 @@ class Router extends MainRouter implements RouterInterface {
      */
     private $_routes = array();
 
+    private $_url = '';
+
     /**
      * Запуск екшена роута
      *
@@ -20,6 +22,8 @@ class Router extends MainRouter implements RouterInterface {
      * @throws \Exception
      */
     public function runAction($url) {
+
+        $this->_url = $url;
 
         $this->getController($url);
 
@@ -102,6 +106,13 @@ class Router extends MainRouter implements RouterInterface {
         }
 
         throw new \Exception('Неверное имя роута');
+
+    }
+
+
+    public function getCurrentPath() {
+
+        return $this->_url;
 
     }
 

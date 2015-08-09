@@ -1,0 +1,43 @@
+<div class="paginator">
+
+    <div class="pager_content">
+        <div class="pages">
+            <span class="page">
+                <span>Страница: </span>
+            </span>
+
+            {% for key, val in pages %}
+                {% if val == loop.parent.page %}
+                    <span class="page current">
+                        <span>{{ val }}</span>
+                    </span>
+                {% else %}
+                    <span class="page">
+                        <a href="{{ loop.parent.url|raw }}&page={{ val }}&limit={{ loop.parent.curLimit }}">{{ val }}</a>
+                    </span>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="limits">
+            <span class="page">
+                <span>Разбивать по: </span>
+            </span>
+
+
+            {% for key, val in limites %}
+            {% if val == loop.parent.curLimit %}
+                <span class="limit current">
+                    <span>{{ val }}</span>
+                </span>
+            {% else %}
+                <span class="limit">
+                    <a href="{{ loop.parent.url|raw }}&page=1&limit={{ val }}">{{ val }}</a>
+                </span>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>

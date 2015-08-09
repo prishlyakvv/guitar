@@ -256,6 +256,21 @@ abstract class MainModel implements ModelInterface {
 
     }
 
+    /**
+     * Получить все записи результата
+     *
+     * @return mixed
+     */
+    public function getCount() {
+
+        $this->selectColumns(array(
+            'count' => 'count(*)',
+        ))->execute();
+
+        return (int) $this->_srcQueryObj->fetchColumn();
+
+    }
+
 
     /**
      * Получение Sql

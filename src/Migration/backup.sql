@@ -44,6 +44,42 @@ INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) 
 INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(10, 'Смартфоны', '/img/uploaded/category/1.png', 0, 10);
 INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(11, 'Стулья', '/img/uploaded/category/2.png', 0, 11);
 
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(12, 'Магнитофоны', '/img/uploaded/category/1.png', 0, 12);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(13, 'Телевизоры', '/img/uploaded/category/2.png', 0, 13);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(14, 'Кассеты', '/img/uploaded/category/3.png', 1, 14);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(15, 'Диски', '/img/uploaded/category/4.png', 0, 15);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(16, 'Sony', '/img/uploaded/category/5.png', 3, 16);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(17, 'Philips', '/img/uploaded/category/6.png', 3, 17);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(18, 'Ноутбуки', '/img/uploaded/category/7.png', 0, 18);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(19, 'Планшеты', '/img/uploaded/category/8.png', 0, 19);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(20, 'Наушники', '/img/uploaded/category/9.png', 0, 20);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(21, 'Смартфоны', '/img/uploaded/category/1.png', 0, 21);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(22, 'Стулья', '/img/uploaded/category/2.png', 0, 22);
+
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(23, 'Магнитофоны', '/img/uploaded/category/1.png', 0, 23);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(24, 'Телевизоры', '/img/uploaded/category/2.png', 0, 24);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(25, 'Кассеты', '/img/uploaded/category/3.png', 1, 25);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(26, 'Диски', '/img/uploaded/category/4.png', 0, 26);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(27, 'Sony', '/img/uploaded/category/5.png', 3, 27);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(28, 'Philips', '/img/uploaded/category/6.png', 3, 28);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(29, 'Ноутбуки', '/img/uploaded/category/7.png', 0, 29);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(30, 'Планшеты', '/img/uploaded/category/8.png', 0, 30);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(31, 'Наушники', '/img/uploaded/category/9.png', 0, 31);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(32, 'Смартфоны', '/img/uploaded/category/1.png', 0, 32);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(33, 'Стулья', '/img/uploaded/category/2.png', 0, 33);
+
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(34, 'Магнитофоны', '/img/uploaded/category/1.png', 0, 34);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(35, 'Телевизоры', '/img/uploaded/category/2.png', 0, 35);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(36, 'Кассеты', '/img/uploaded/category/3.png', 1, 36);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(37, 'Диски', '/img/uploaded/category/4.png', 0, 37);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(38, 'Sony', '/img/uploaded/category/5.png', 3, 38);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(39, 'Philips', '/img/uploaded/category/6.png', 3, 39);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(40, 'Ноутбуки', '/img/uploaded/category/7.png', 0, 40);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(41, 'Планшеты', '/img/uploaded/category/8.png', 0, 41);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(42, 'Наушники', '/img/uploaded/category/9.png', 0, 42);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(43, 'Смартфоны', '/img/uploaded/category/1.png', 0, 43);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(44, 'Стулья', '/img/uploaded/category/2.png', 0, 44);
+
 --
 -- Indexes for table `category`
 --

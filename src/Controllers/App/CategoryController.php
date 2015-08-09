@@ -5,19 +5,27 @@ namespace src\Controllers\App;
 use src\Controllers\MainController;
 use src\Models\Category;
 use src\Controllers\App\Component\TopMenuComponent;
+use System\Controller\Component\PaginatorComponent;
 
 class CategoryController extends MainController {
 
     public function indexAction() {
 
+        $paginator = new PaginatorComponent($this);
         $catTbl = new Category($this->getApp());
-        $categories = $catTbl->getAllThisLevelCategories();
+        $countCategories = $catTbl->getCountAllThisLevelCategories();
+        $paginator->setCount($countCategories);
+        $paginatorResp = $paginator->toString();
+
+        $catTbl = new Category($this->getApp());
+        $categories = $catTbl->getAllThisLevelCategories(0, $paginator->getFrom(), $paginator->getCurrLimit());
 
         $componentMenu = new TopMenuComponent($this);
         $componentMenuResp = $componentMenu->toString();
 
         $this->render(array(
             'categories' => $categories,
+            'paginatorR' => $paginatorResp,
             'leftMenu' => $componentMenuResp,
         ), 'App/Category/index.html');
 

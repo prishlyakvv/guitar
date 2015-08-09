@@ -58,9 +58,11 @@ class Category extends MainModel {
 
     /**
      * @param int $id
+     * @param int $from
+     * @param int $count
      * @return array
      */
-    public function getAllThisLevelCategories($id = 0) {
+    public function getAllThisLevelCategories($id = 0, $from = 0, $count = 0) {
 
         $tbl = $this->selectColumns(array(
             'id' => 'self.id',
@@ -82,10 +84,33 @@ class Category extends MainModel {
             $tbl->where('self.parent_category', 0);
         }
 
+        if ($from && $count) {
+            $tbl->limit($from, $count);
+        } elseif ($count) {
+            $tbl->limit($count);
+        }  elseif ($from) {
+            $tbl->limit($from);
+        }
+
+
         $categories = $tbl->execute()->fetchAll();
 
         return (array) $categories;
 
+    }
+
+    public function getCountAllThisLevelCategories($id = 0) {
+
+        $tbl = $this;
+        if ($id) {
+            $tbl->where('self.parent_category', (int) $id);
+        } else {
+            $tbl->where('self.parent_category', 0);
+        }
+
+        $categories = $tbl->getCount();
+
+        return $categories;
     }
 
 
