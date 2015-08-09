@@ -29,6 +29,11 @@ class MainFormType {
     protected $_errors = array();
 
     /**
+     * @var array
+     */
+    protected $_formErrors = array();
+
+    /**
      * @var MainValidator
      */
     protected $_validator;
@@ -177,8 +182,6 @@ class MainFormType {
      * @return string
      */
     public function render() {
-        $this->_form->setErrors($this->getErrors());
-
         return $this->_form->render();
 
     }
@@ -197,6 +200,7 @@ class MainFormType {
     public function addError($error)
     {
         $this->_errors[] = $error;
+        $this->_form->setErrors($this->getErrors());
     }
 
     /**
@@ -205,6 +209,7 @@ class MainFormType {
     public function clearErrors()
     {
         $this->_errors = array();
+        $this->_form->setErrors($this->getErrors());
     }
 
     /**
@@ -307,6 +312,32 @@ class MainFormType {
     public function addData($key, $value)
     {
         $this->_data[$key] = $value;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFormErrors()
+    {
+        return $this->_formErrors;
+    }
+
+    /**
+     * @param array $formErrors
+     */
+    public function setFormErrors($formErrors)
+    {
+        $this->_formErrors = $formErrors;
+        $this->_form->setFormErrors($this->getFormErrors());
+    }
+
+    /**
+     * @param $formError
+     */
+    public function addFormError($formError)
+    {
+        $this->_formErrors[] = $formError;
+        $this->_form->setFormErrors($this->getFormErrors());
     }
 
 } 

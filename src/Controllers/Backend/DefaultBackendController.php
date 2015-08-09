@@ -29,25 +29,33 @@ class DefaultBackendController extends MainBackendController {
         if (!$sess->getByName('login_id') || !$sess->getByName('login_name')) {
             $formUser = new LoginFormType($this->getApp(), $this);
             if ($_POST) {
+
+                $res = array();
+                $res['redirect'] = false;
                 if ($formUser->fillAndIsValid()) {
                     $tblUser = new Users($this->getApp());
                     $login = $tblUser->login($formUser->getData());
                     if (isset($login['id']) && isset($login['name'])) {
                         $sess->set('login_id', $login['id']);
                         $sess->set('login_name', $login['name']);
-                        $this->redirect('backend_index');
+                        $res['redirect'] = true;
                     } else {
-                        $formUser->addError('Неверные данные');
+                        $formUser->addFormError('Неверные данные');
                     }
                 }
+
+
+                $res['form'] = $formUser->render();
+
+                header('Content-Type: application/json');
+                echo  json_encode($res);
+                die;
             }
             $formLogin = $formUser->render();
         } else {
             $formLogin = false;
             $username = $sess->getByName('login_name');
         }
-
-
 
         $this->render(array(
             'componentMenu' => $componentResp,

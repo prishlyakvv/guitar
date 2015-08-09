@@ -24,6 +24,8 @@ class MainForm {
     private $_templ = 'Form/form.html';
     private $_multipart = false;
     private $_errors = array();
+    private $_formErrors = array();
+    private $_isAjax = false;
 
     /**
      * @var \System\App
@@ -253,6 +255,8 @@ class MainForm {
             'fields' => $this->getElements(),
             'multipart' => $this->getMultipart(),
             'errors' => $this->getErrors(),
+            'formErrors' => $this->getFormErrors(),
+            'isAjax' => $this->getIsAjax(),
         );
 
         $res = $this->renderTmpl($data, $this->getTempl());
@@ -393,6 +397,38 @@ class MainForm {
     public function setErrors($errors)
     {
         $this->_errors = $errors;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsAjax()
+    {
+        return $this->_isAjax;
+    }
+
+    /**
+     * @param boolean $isAjax
+     */
+    public function setIsAjax($isAjax)
+    {
+        $this->_isAjax = $isAjax;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFormErrors()
+    {
+        return $this->_formErrors;
+    }
+
+    /**
+     * @param array $formErrors
+     */
+    public function setFormErrors($formErrors)
+    {
+        $this->_formErrors = $formErrors;
     }
 
 } 

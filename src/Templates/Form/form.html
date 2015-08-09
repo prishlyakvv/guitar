@@ -1,8 +1,8 @@
-<div class="form">
+<div class="form {% if isAjax %}ajax{% endif %}">
     <form action="{{ action }}" method="{{ method }}" name="{{ name }}" {% if multipart == true %}enctype="multipart/form-data"{% endif %}>
 
 
-        {% for err in errors %}
+        {% for err in formErrors %}
         <div class="error">{{ err|raw }}</div>
         {% endfor %}
 

@@ -67,4 +67,34 @@ $(document).ready(function(){
 
     confirm_submit('.confirm-submit');
 
+
+    $('.form.ajax').on('submit', 'form', function(e){
+
+        var $form = $(this);
+        var data = $form.serialize();
+        var $block = $form.closest('.form.ajax');
+        var action = $form.attr('action');
+        var method = $form.attr('method');
+
+        var req = $.post(action, data);
+
+        req.done(function(data){
+
+            if(typeof(data) !='object') {
+                return;
+            }
+
+            if (data.form) {
+                $block.html(data.form);
+            }
+
+            if (data.redirect) {
+                location.reload();
+            }
+
+        });
+
+        return false;
+    });
+
 });

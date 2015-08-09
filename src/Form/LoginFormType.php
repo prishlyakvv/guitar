@@ -14,6 +14,7 @@ class LoginFormType extends MainFormType {
 
         $form->setName('login');
         $form->setMethod(MainForm::METHOD_POST);
+        $form->setIsAjax(true);
 
         $validOpt = array(
             MainValidator::LENGTH_MAX => array(
