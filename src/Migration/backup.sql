@@ -38,7 +38,11 @@ INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) 
 INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(4, 'Диски', '/img/uploaded/category/4.png', 0, 3);
 INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(5, 'Sony', '/img/uploaded/category/5.png', 3, 5);
 INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(6, 'Philips', '/img/uploaded/category/6.png', 3, 6);
-
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(7, 'Ноутбуки', '/img/uploaded/category/7.png', 0, 7);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(8, 'Планшеты', '/img/uploaded/category/8.png', 0, 8);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(9, 'Наушники', '/img/uploaded/category/9.png', 0, 9);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(10, 'Смартфоны', '/img/uploaded/category/1.png', 0, 10);
+INSERT INTO `category` (`id`, `name`, `file`, `parent_category`, `number_sort`) VALUES(11, 'Стулья', '/img/uploaded/category/2.png', 0, 11);
 
 --
 -- Indexes for table `category`
@@ -102,6 +106,8 @@ INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `dat
   VALUES(8, 'Кассета тест12', 78, 5, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/8.png', 1, 1, 'Какой то текст описания ');
 INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `date_modifed`, `file`, `visible`, `isset`, `description`)
   VALUES(9, 'Кассета тест13', 99, 6, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/9.png', 1, 1, 'Какой то текст описания ');
+INSERT INTO `product` (`id`, `name`, `price`, `category_id`, `date_create`, `date_modifed`, `file`, `visible`, `isset`, `description`)
+  VALUES(10, 'Кассета Скрытая', 99, 6, '2015-08-01 00:00:00', '2015-08-01 06:23:30', '/img/uploaded/product/9.png', 0, 1, 'Какой то текст описания ');
 
 
 --

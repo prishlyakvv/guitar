@@ -47,7 +47,7 @@ class Category extends MainModel {
                 'parent_category' => 'self.parent_category',
                 'number_sort' => 'self.number_sort',
             ))
-            ->order('self.id ASC')
+            ->order('self.number_sort ASC')
             ->execute();
 
         $categories = $tbl->fetchAll();
@@ -56,6 +56,10 @@ class Category extends MainModel {
 
     }
 
+    /**
+     * @param int $id
+     * @return array
+     */
     public function getAllThisLevelCategories($id = 0) {
 
         $tbl = $this->selectColumns(array(
@@ -65,7 +69,11 @@ class Category extends MainModel {
             'parent_category' => 'self.parent_category',
             'number_sort' => 'self.number_sort',
         ))
-            ->order('self.id ASC');
+            ->info('product', 'product', 'category_id', 'id', MainModel::JOIN_TYPE_LEFT)
+            ->info('category', 'category_children', 'parent_category', 'id', MainModel::JOIN_TYPE_LEFT)
+            ->where('(category_children.id IS NOT NULL OR product.id IS NOT NULL)')
+            ->group('self.id')
+            ->order('self.number_sort ASC');
 
         if ($id) {
             $tbl->where('self.parent_category', (int) $id);
@@ -115,6 +123,7 @@ class Category extends MainModel {
                 'file' => 'product.file',
             ))
             ->where('self.id', (int) $catId)
+            ->where('product.visible', 1)
             ->execute();
 
         $products = $tbl->fetchAll();

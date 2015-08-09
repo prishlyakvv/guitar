@@ -59,15 +59,30 @@ section#center {
 
 
 .categories {
-    width: 730px;
     padding: 30px;
+    width: 100%;
 }
+.categories h3 {
+    height: 15px;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
 .categories .item {
-    width: 201px;
     float: left;
     text-align: center;
+    width: 33%;
+    margin-top: 10px;
+}
+.categories .clear {
+    clear: both;
+    width: 100%;
+}
+.categories .item .item-content {
+    width: 201px;
     border: 1px solid black;
-    margin: 10px;
+    margin-left: 15%;
 }
 .categories .type {
     font-weight: bold;

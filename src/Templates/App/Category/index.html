@@ -14,13 +14,21 @@
 {% block content %}
     <div class="categories">
         {% for category in categories %}
+
+        {% if loop.index0 is divisible by(3) %}<div class="clear">{% endif %}
+
         <div class="item">
-            <div class="type category">Категория</div>
-            <div class="photo"><img src="{{category.file}}"></div>
-            <div>
-                <a href="/category/?id={{ category.id }}">{{category.name}}</a>
+            <div class="item-content">
+                <div class="type category">Категория</div>
+                <div class="photo"><img src="{{category.file}}"></div>
+                <div>
+                    <a href="/category/?id={{ category.id }}">{{category.name}}</a>
+                </div>
             </div>
         </div>
+
+        {% if (loop.index0+1) is divisible by(3) %}</div>{% endif %}
+
         {% endfor %}
     </div>
 {% endblock %}
