@@ -1,9 +1,9 @@
 {% extends "baseFrontend.html" %}
 
-{% block title %}Список продуктов категории ХХХ{% endblock %}
+{% block title %}Список продуктов категории &laquo;{{ category.name }}&raquo;{% endblock %}
 
 {% block header %}
-<h1>Список продуктов категории ХХХ</h1>
+<h1>Список продуктов категории &laquo;{{ category.name }}&raquo;</h1>
 {% endblock %}
 
 {% block menu %}
@@ -12,6 +12,12 @@
 
 {% block content %}
     <div class="categories">
+
+        {% if (categories is empty) and (products is empty) %}
+            <div class="clear">
+                <h3>В данной категории не товаров или подкатегорий</h3>
+            </div>
+        {% endif %}
 
         {% if categories %}
         <div class="clear"><h3>Категории</h3></div>
@@ -26,6 +32,8 @@
                 <div>
                     <a href="/category/?id={{ category.id }}">{{category.name}}</a>
                 </div>
+                <div class="type category">Товары - {{ category.count_products }} шт</div>
+                <div class="type category">Подкатегорий - {{ category.count_subcategories }}</div>
             </div>
         </div>
         {% if (loop.index0+1) is divisible by(3) %}</div>{% endif %}
@@ -33,7 +41,7 @@
 
 
         {% if products %}
-        <div class="clear"><h3>Продукты</h3></div>
+        <div class="clear"><h3>Товары</h3></div>
         {% endif %}
 
         {% for product in products %}

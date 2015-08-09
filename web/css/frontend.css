@@ -83,6 +83,7 @@ section#center {
     width: 201px;
     border: 1px solid black;
     margin-left: 15%;
+    background: #fff;
 }
 .categories .type {
     font-weight: bold;
@@ -102,6 +103,9 @@ section#center {
 }
 .categories .photo img{
     width: 100%;
+}
+.categories .item-content:hover{
+    background: #dfd;
 }
 .categories .item a {color: black; font-weight: bold;}
 

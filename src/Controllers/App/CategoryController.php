@@ -28,19 +28,22 @@ class CategoryController extends MainController {
         $catId = (int) $this->getRequestParam('id', 0);
 
         $catTbl = new Category($this->getApp());
-        $categories = $catTbl->getAllThisLevelCategories($catId);
+        $category = $catTbl->getCategory($catId);
 
-        $catTbl = new Category($this->getApp());
-        $products = $catTbl->getProductsFromCategory($catId);
-
-        if (!$products) {
+        if (!$category) {
             $this->notFound();
         }
+
+        $catTbl = new Category($this->getApp());
+        $categories = $catTbl->getAllThisLevelCategories($catId);
+        $catTbl = new Category($this->getApp());
+        $products = $catTbl->getProductsFromCategory($catId);
 
         $componentMenu = new TopMenuComponent($this);
         $componentMenuResp = $componentMenu->toString();
 
         $this->render(array(
+            'category' => $category,
             'categories' => $categories,
             'products' => $products,
             'leftMenu' => $componentMenuResp,
