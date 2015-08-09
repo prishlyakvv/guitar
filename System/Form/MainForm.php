@@ -5,6 +5,7 @@ namespace System\Form;
 use System\Form\Fields\File;
 use System\Form\Fields\Submit;
 use System\Form\Fields\Text;
+use System\Form\Fields\Password;
 use System\Form\Fields\Textarea;
 use System\Form\Fields\Hidden;
 use System\Form\Fields\Select;
@@ -22,6 +23,7 @@ class MainForm {
     private $_name = 'form_';
     private $_templ = 'Form/form.html';
     private $_multipart = false;
+    private $_errors = array();
 
     /**
      * @var \System\App
@@ -69,6 +71,31 @@ class MainForm {
         $this->checkName($name);
 
         $el = new Text();
+        $el->setName($name);
+        $el->setLabel($label);
+        $el->setValue($value);
+        $el->setRequire($require);
+        $el->setValidateOpts($paramValidate);
+
+        $this->addElement($el);
+
+        return $this;
+
+    }
+
+    /**
+     * @param $name
+     * @param $label
+     * @param $value
+     * @param $require
+     * @param $paramValidate
+     * @return $this
+     */
+    public function addPassword($name, $label, $value, $require, $paramValidate) {
+
+        $this->checkName($name);
+
+        $el = new Password();
         $el->setName($name);
         $el->setLabel($label);
         $el->setValue($value);
@@ -225,6 +252,7 @@ class MainForm {
             'name' => $this->getName(),
             'fields' => $this->getElements(),
             'multipart' => $this->getMultipart(),
+            'errors' => $this->getErrors(),
         );
 
         $res = $this->renderTmpl($data, $this->getTempl());
@@ -349,6 +377,22 @@ class MainForm {
     public function setMultipart($multipart)
     {
         $this->_multipart = $multipart;
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->_errors;
+    }
+
+    /**
+     * @param array $errors
+     */
+    public function setErrors($errors)
+    {
+        $this->_errors = $errors;
     }
 
 } 

@@ -13,4 +13,14 @@
 
 {% block content %}
 
+
+{% if username %}
+    <h3> Вы авторизованы под именем &laquo;{{ username }}&raquo; </h3>
+    <a href="/admin?exit=1">Выйти</a>
+
+{% else %}
+    <h3> Для работы с разделом необходима авторизация </h3>
+    {{ formLogin|raw }}
+{% endif %}
+
 {% endblock %}

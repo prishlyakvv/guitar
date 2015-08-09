@@ -14,6 +14,9 @@ abstract class MainModel implements ModelInterface {
     const JOIN_TYPE = 'JOIN';
     const JOIN_TYPE_LEFT = 'LEFT JOIN';
 
+    const TYPE_INT = 'int';
+    const TYPE_STRING = 'string';
+
     /**
      * @var \System\App
      */
@@ -135,9 +138,10 @@ abstract class MainModel implements ModelInterface {
      *
      * @param $str
      * @param string $val
+     * @param string $type
      * @return $this
      */
-    public function where($str, $val = '') {
+    public function where($str, $val = '', $type = self::TYPE_INT) {
 
         $where = (!$this->_srcQueryWhere) ? " " : " AND ";
 
@@ -147,7 +151,12 @@ abstract class MainModel implements ModelInterface {
             $val = join(', ', $val);
             $where .= " IN ({$val})";
         } elseif (!empty($val) || $val === 0) {
-            $where .= " = {$val}";
+            if ($type == self::TYPE_INT) {
+                $where .= " = {$val}";
+            } elseif ($type == self::TYPE_STRING) {
+                $where .= " = '{$val}'";
+            }
+
         }
 
         $this->_srcQueryWhere[] = $where;

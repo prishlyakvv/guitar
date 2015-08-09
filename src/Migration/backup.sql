@@ -91,7 +91,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
 --
 
 DELIMITER //
@@ -156,7 +156,7 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 
 
 DELIMITER //
@@ -173,6 +173,39 @@ CREATE TRIGGER `trigger_update_product` BEFORE UPDATE ON `product`
     SET NEW.date_modifed = now();
   END//
 DELIMITER ;
+
+
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `password`) VALUES(1, 'admin1', MD5("123456"));
+INSERT INTO `users` (`id`, `name`, `password`) VALUES(2, 'admin2', MD5("test"));
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+ ADD PRIMARY KEY (`id`);
+
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 
 
 COMMIT;

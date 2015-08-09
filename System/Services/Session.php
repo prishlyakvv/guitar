@@ -47,6 +47,12 @@ class Session {
         $this->_source[$key] = $value;
     }
 
+    public function getByName($key) {
+
+        return (isset($this->_source[$key])) ? $this->_source[$key] : false;
+
+    }
+
     /**
      * @param $key
      */

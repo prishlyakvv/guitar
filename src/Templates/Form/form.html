@@ -2,6 +2,10 @@
     <form action="{{ action }}" method="{{ method }}" name="{{ name }}" {% if multipart == true %}enctype="multipart/form-data"{% endif %}>
 
 
+        {% for err in errors %}
+        <div class="error">{{ err|raw }}</div>
+        {% endfor %}
+
         {% for field in fields %}
 
             {% if field.htmlTag == 'input_hidden' %}
@@ -46,6 +50,20 @@
                     </div>
                     <div>
                         <input type="text" name="{{ field.name }}" value="{{ field.value }}" id="{{ loop.parent.name }}_{{ field.name }}">
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if field.htmlTag == 'input_password' %}
+                <div class="row">
+                    {% if field.error %}
+                        <div class="error">{{ field.error|raw }}</div>
+                    {% endif %}
+                    <div>
+                        <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
+                    </div>
+                    <div>
+                        <input type="password" name="{{ field.name }}" value="{{ field.value }}" id="{{ loop.parent.name }}_{{ field.name }}">
                     </div>
                 </div>
             {% endif %}

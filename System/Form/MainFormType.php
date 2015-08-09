@@ -177,6 +177,7 @@ class MainFormType {
      * @return string
      */
     public function render() {
+        $this->_form->setErrors($this->getErrors());
 
         return $this->_form->render();
 
