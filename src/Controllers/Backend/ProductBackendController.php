@@ -6,6 +6,7 @@ use src\Controllers\Backend\Component\TopMenuComponent;
 use src\Models\Product;
 use src\Controllers\Backend\Component\NotifyComponent;
 use src\Form\ProductFormType;
+use System\Form\MainFilter;
 
 class ProductBackendController extends MainBackendController {
 
@@ -25,13 +26,21 @@ class ProductBackendController extends MainBackendController {
             $this->redirect('backend_products');
         }
 
+        $filter = new MainFilter($this->getApp(), $this);
+        $data = array(
+            array('id' => 'ALL', 'name' => 'Все статусы'),
+            array('id' => 1, 'name' => 'Видимые'),
+            array('id' => 0, 'name' => 'Скрытые'),
+        );
+        $filter->addFSelect('visible', 'Видимость', $data);
 
-        $products = $productTbl->getAllProducts();
+        $products = $productTbl->getAllProducts($filter->getData());
 
         $componentNotify = new NotifyComponent($this);
         $componentNotifyResp = $componentNotify->toString();
 
         $this->render(array(
+            'filterR' => $filter->render(),
             'componentMenu' => $componentResp,
             'products' => $products,
             'componentNotify' => $componentNotifyResp,

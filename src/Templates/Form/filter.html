@@ -1,0 +1,50 @@
+<div class="filter">
+    <form method="get" name="{{ name }}">
+
+        {% for field in fields %}
+
+            {% if field.htmlTag == 'select' %}
+            <div class="row">
+                <div>
+                    <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
+                </div>
+                <div>
+                    <select name="{{ field.name }}" id="{{ loop.parent.name }}_{{ field.name }}">
+                        {% for option in field.data %}
+                            <option value="{{ option.id }}" {% if option.id == loop.parent.field.value %}selected="selected"{% endif %}>{{ option.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if field.htmlTag == 'checkbox' %}
+            <div class="row">
+                <div>
+                    <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="{{ field.name }}" value="1" id="{{ loop.parent.name }}_{{ field.name }}" {% if field.value %}checked="checked"{% endif %}>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if field.htmlTag == 'input_text' %}
+                <div class="row">
+                    <div>
+                        <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
+                    </div>
+                    <div>
+                        <input type="text" name="{{ field.name }}" value="{{ field.value }}" id="{{ loop.parent.name }}_{{ field.name }}">
+                    </div>
+                </div>
+            {% endif %}
+
+        {% endfor %}
+
+        <div class="row submit">
+            <input type="submit" value="Фильтровать">
+        </div>
+
+    </form>
+</div>

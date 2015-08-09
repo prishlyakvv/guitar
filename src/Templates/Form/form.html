@@ -16,7 +16,7 @@
                     <label for="{{ loop.parent.name }}_{{ field.name }}">{{ field.label }}</label>
                 </div>
                 <div>
-                    <select name="{{ field.name }}" value="{{ field.value }}" id="{{ loop.parent.name }}_{{ field.name }}">
+                    <select name="{{ field.name }}" id="{{ loop.parent.name }}_{{ field.name }}">
                         {% for option in field.data %}
                             <option value="{{ option.id }}" {% if option.id == loop.parent.field.value %}selected="selected"{% endif %}>{{ option.name }}</option>
                         {% endfor %}

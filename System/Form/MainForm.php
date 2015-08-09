@@ -48,7 +48,7 @@ class MainForm {
         foreach($this->_elements as $element) {
 
             if ($element->getName() == $name) {
-                throw new \Exception('Повторяющееся имя для элемента фломы');
+                throw new \Exception('Повторяющееся имя для элемента формы');
             }
 
         }

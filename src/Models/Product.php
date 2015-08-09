@@ -50,9 +50,10 @@ class Product extends MainModel {
     }
 
     /**
+     * @param array $where
      * @return mixed
      */
-    public function getAllProducts() {
+    public function getAllProducts($where = array()) {
 
         $tbl = $this->selectColumns(array(
                 'id' => 'self.id',
@@ -65,8 +66,15 @@ class Product extends MainModel {
                 'visible' => 'self.visible',
                 'isset' => 'self.isset',
                 'description' => 'self.description',
-            ))
-            ->order('self.id ASC')
+            ));
+
+        if ($where) {
+            if (isset($where['visible']) && is_numeric($where['visible']) && in_array($where['visible'], array(0, 1))) {
+                $tbl->where('self.visible', (int) $where['visible']);
+            }
+        }
+
+        $tbl->order('self.id ASC')
             ->execute();
 
         $products = $tbl->fetchAll();
