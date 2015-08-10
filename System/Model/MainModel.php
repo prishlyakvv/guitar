@@ -25,7 +25,7 @@ abstract class MainModel implements ModelInterface {
     /**
      * @var \PDO
      */
-    private $_pdo;
+    private $_connection;
 
 
     private $_srcQuery = '';
@@ -55,8 +55,26 @@ abstract class MainModel implements ModelInterface {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         );
 
-        $this->_pdo = new PDO($dsn, $configDB['database_user'], $configDB['database_password'], $opt);
+        /**
+         * Соединение создается 1 раз и хранится в классе App
+         */
+        if (!$this->getApp()->getConnectionDB()) {
+            $coonection = new PDO($dsn, $configDB['database_user'], $configDB['database_password'], $opt);
+            $this->getApp()->setConnectionDB($coonection);
+        }
 
+        $this->_connection = $this->getApp()->getConnectionDB();
+    }
+
+    protected function clearParamsQuery() {
+        $this->_srcQueryObj = null;
+        $this->_nameMainTable = 'self';
+        $this->_srcQuerySelectColumns = '*';
+        $this->_srcQueryJoin = array();
+        $this->_srcQueryWhere = array();
+        $this->_srcQueryGroup = '';
+        $this->_srcQueryOrder = '';
+        $this->_srcQueryLimit = '';
     }
 
     /**
@@ -229,7 +247,7 @@ abstract class MainModel implements ModelInterface {
         $this->_srcQuery = $this->getSQL();
 
         try {
-            $stmt = $this->_pdo->prepare($this->_srcQuery);
+            $stmt = $this->getConnection()->prepare($this->_srcQuery);
             $stmt->execute();
 
             $this->_srcQueryObj = $stmt;
@@ -250,7 +268,9 @@ abstract class MainModel implements ModelInterface {
      */
     public function fetchAll() {
 
-        return (array) $this->_srcQueryObj->fetchAll();
+        $rez = (array) $this->_srcQueryObj->fetchAll();
+        $this->clearParamsQuery();
+        return $rez;
 
     }
 
@@ -261,7 +281,9 @@ abstract class MainModel implements ModelInterface {
      */
     public function fetchOne() {
 
-        return (array) $this->_srcQueryObj->fetchObject();
+        $rez = (array) $this->_srcQueryObj->fetchObject();
+        $this->clearParamsQuery();
+        return $rez;
 
     }
 
@@ -276,7 +298,9 @@ abstract class MainModel implements ModelInterface {
             'count' => 'count(*)',
         ))->execute();
 
-        return (int) $this->_srcQueryObj->fetchColumn();
+        $rez = (int) $this->_srcQueryObj->fetchColumn();
+        $this->clearParamsQuery();
+        return $rez;
 
     }
 
@@ -325,16 +349,19 @@ abstract class MainModel implements ModelInterface {
                 $ids = implode(',', SmallLibs::int_array($id));
 
                 $this->_srcQuery = "DELETE FROM {$this->_tbl} WHERE FIND_IN_SET ({$removeByColum}, :id)";
-                $stmt = $this->_pdo->prepare($this->_srcQuery);
+                $stmt = $this->getConnection()->prepare($this->_srcQuery);
                 $stmt->bindParam(':id', $ids, PDO::PARAM_STR);
             } else {
                 $this->_srcQuery = "DELETE FROM {$this->_tbl} WHERE {$removeByColum} = :id";
-                $stmt = $this->_pdo->prepare($this->_srcQuery);
+                $stmt = $this->getConnection()->prepare($this->_srcQuery);
                 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             }
 
             $res = $stmt->execute();
             $this->postRemove($res);
+
+            $this->clearParamsQuery();
+
             return $res;
 
         } catch(\Exception $ex) {
@@ -418,12 +445,14 @@ abstract class MainModel implements ModelInterface {
 
             $this->_srcQuery = "INSERT INTO {$this->_tbl} ({$colsStr}) VALUES ({$valStr})";
 
-            $stmt = $this->_pdo->prepare($this->_srcQuery);
+            $stmt = $this->getConnection()->prepare($this->_srcQuery);
 
             $res = $stmt->execute($params);
             if ($res) {
-                $res = $this->_pdo->lastInsertId($pk);
+                $res = $this->getConnection()->lastInsertId($pk);
             }
+
+            $this->clearParamsQuery();
 
             $this->postInsert($res);
             return $res;
@@ -464,7 +493,7 @@ abstract class MainModel implements ModelInterface {
             $colsWhere = implode('=?, ', array_keys($where)) . '=? ';
 
             $this->_srcQuery = "UPDATE {$this->_tbl} SET {$colsSet} WHERE {$colsWhere}";
-            $stmt = $this->_pdo->prepare($this->_srcQuery);
+            $stmt = $this->getConnection()->prepare($this->_srcQuery);
 
             $params = array_values(array_merge($data, $where));
             $res = $stmt->execute($params);
@@ -472,6 +501,8 @@ abstract class MainModel implements ModelInterface {
             if ($res) {
                 $res = $data;
             }
+
+            $this->clearParamsQuery();
 
             $this->postUpdate($res);
             return $res;
@@ -492,5 +523,21 @@ abstract class MainModel implements ModelInterface {
      * @param $res
      */
     protected function postUpdate($res) {}
+
+    /**
+     * @return \PDO
+     */
+    public function getConnection()
+    {
+        return $this->_connection;
+    }
+
+    /**
+     * @param \PDO $connection
+     */
+    public function setConnection($connection)
+    {
+        $this->_connection = $connection;
+    }
 
 } 

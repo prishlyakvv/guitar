@@ -35,6 +35,8 @@ final class App {
 
     protected $_response = '';
 
+    protected $connectionDB;
+
     /**
      * @var Services\Session
      */
@@ -149,6 +151,22 @@ final class App {
     public function getCurrDir()
     {
         return $this->_currDir;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConnectionDB()
+    {
+        return $this->connectionDB;
+    }
+
+    /**
+     * @param mixed $connectionDB
+     */
+    public function setConnectionDB($connectionDB)
+    {
+        $this->connectionDB = $connectionDB;
     }
 
 }

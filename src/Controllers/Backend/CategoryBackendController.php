@@ -51,15 +51,6 @@ class CategoryBackendController extends MainBackendController {
         $componentMenu = new TopMenuComponent($this);
         $componentMenuResp = $componentMenu->toString();
 
-        if ($_POST && isset($_POST['remove'])) {
-            if ($categoriesTbl->removeCategories($_POST['remove'])) {
-                $this->addNotify('Успешно удалено');
-            } else {
-                $this->addNotify('Удаление не выполнено');
-            }
-            $this->redirect('backend_categories');
-        }
-
         $componentNotify = new NotifyComponent($this);
         $componentNotifyResp = $componentNotify->toString();
 

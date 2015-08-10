@@ -17,7 +17,6 @@ class CategoryController extends MainController {
         $paginator->setCount($countCategories);
         $paginatorResp = $paginator->toString();
 
-        $catTbl = new Category($this->getApp());
         $categories = $catTbl->getAllThisLevelCategories(0, $paginator->getFrom(), $paginator->getCurrLimit());
 
         $componentMenu = new TopMenuComponent($this);
@@ -42,9 +41,7 @@ class CategoryController extends MainController {
             $this->notFound();
         }
 
-        $catTbl = new Category($this->getApp());
         $categories = $catTbl->getAllThisLevelCategories($catId);
-        $catTbl = new Category($this->getApp());
         $products = $catTbl->getProductsFromCategory($catId);
 
         $componentMenu = new TopMenuComponent($this);
