@@ -28,9 +28,9 @@ class ProductBackendController extends MainBackendController {
 
         $filter = new MainFilter($this->getApp(), $this);
         $data = array(
-            array('id' => 'ALL', 'name' => 'Все статусы'),
-            array('id' => 1, 'name' => 'Видимые'),
-            array('id' => 0, 'name' => 'Скрытые'),
+            array('id' => 0, 'name' => 'Все статусы'),
+            array('id' => 'visible', 'name' => 'Видимые'),
+            array('id' => 'hidden', 'name' => 'Скрытые'),
         );
         $filter->addFSelect('visible', 'Видимость', $data);
 

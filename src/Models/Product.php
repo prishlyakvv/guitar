@@ -69,8 +69,12 @@ class Product extends MainModel {
             ));
 
         if ($where) {
-            if (isset($where['visible']) && is_numeric($where['visible']) && in_array($where['visible'], array(0, 1))) {
-                $tbl->where('self.visible', (int) $where['visible']);
+            if (isset($where['visible'])  && in_array($where['visible'], array('visible', 'hidden'))) {
+                if ($where['visible'] == 'visible') {
+                    $tbl->where('self.visible', 1);
+                } elseif ($where['visible'] == 'hidden') {
+                    $tbl->where('self.visible', 0);
+                }
             }
         }
 
