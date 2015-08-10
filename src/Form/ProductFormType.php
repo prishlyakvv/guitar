@@ -76,7 +76,12 @@ class ProductFormType extends MainFormType {
 
 
         if (!empty($_FILES['file']['name']) && $id) {
-            $prefix = '/img/uploaded/product/';
+
+            $configTwigUpload = $this->getApp()->getConfigParam('upload_files');
+            if (!isset($configTwigUpload['images_category_and_product'])) {
+                throw new \Exception('Неверные Параметры конфигурации upload_files');
+            }
+            $prefix = $configTwigUpload['images_category_and_product'] . '/product/';
             $uploaddir = $this->getApp()->getCurrDir() . '/web' . $prefix;
             $info = new \SplFileInfo($_FILES['file']['name']);
             $fileExtension = $info->getExtension();
@@ -108,9 +113,13 @@ class ProductFormType extends MainFormType {
             return false;
         }
 
+        $configTwigUpload = $this->getApp()->getConfigParam('upload_files');
+        if (!isset($configTwigUpload['images_category_and_product'])) {
+            throw new \Exception('Неверные Параметры конфигурации upload_files');
+        }
 
         $id = (int) $data['id'];
-        $file = $this->getApp()->getCurrDir() . '/web/img/uploaded/product/' . $id . '.*';
+        $file = $this->getApp()->getCurrDir() . '/web' . $configTwigUpload['images_category_and_product'] . '/product/' . $id . '.*';
 
         array_map('unlink', glob($file));
 

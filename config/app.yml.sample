@@ -9,3 +9,6 @@ db_parameters:
 twig_params:
     cache_path: '../cache/template'
     templates_path: '../src/Templates'
+
+upload_files:
+    images_category_and_product: /img/uploaded
