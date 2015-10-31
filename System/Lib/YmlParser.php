@@ -11,7 +11,8 @@ class YmlParser {
     public function parse($file) {
 
         $yamlPS = new Parser();
-        $file = '../' . $file;
+        $file = ROOT . '/../' . $file;
+
         if (!file_exists($file)) {
             return array();
         }

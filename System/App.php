@@ -11,6 +11,9 @@ use System\Lib\YmlParser;
 
 final class App {
 
+    const RUN_IN_CONSOLE = 'console';
+    const RUN_IN_WEB = 'web';
+
     /**
      * @var Template\Twig
      */
@@ -22,6 +25,8 @@ final class App {
      * @var Router
      */
     protected $_router;
+
+    protected $_console;
 
     protected $_url;
 
@@ -44,17 +49,31 @@ final class App {
      */
     protected $_session;
 
-    private function __construct() {
-        $this->_session = new Session($this);
-        $this->_templater = new Twig($this);
-        $this->_router = new Router($this);
+    private $_runIn;
+
+    private $_args = array();
+
+    private function __construct($runIn) {
+
+        if ($runIn == App::RUN_IN_WEB) {
+            $this->_session = new Session();
+            $this->_templater = new Twig();
+            $this->_router = new Router();
+        }
+
+        if ($runIn == App::RUN_IN_CONSOLE) {
+            $this->_console = new Console();
+        }
+
+        $this->_runIn = $runIn;
+
         $this->loadConfig();
         $this->_currDir = __DIR__ . '/..';
     }
 
-    public static function getInstance() {
+    public static function getInstance($runIn = App::RUN_IN_WEB) {
         if (!self::$_instance) {
-            self::$_instance = new self();
+            self::$_instance = new self($runIn);
         }
         return self::$_instance;
     }
@@ -105,11 +124,23 @@ final class App {
      * Точка запуска приложения
      */
     public function run(){
-        $url = parse_url($_SERVER["REQUEST_URI"]);
-        $path = $url['path'];
-        $this->_router->runAction($path);
+
+        if ($this->_runIn == App::RUN_IN_WEB) {
+            $url = parse_url($_SERVER["REQUEST_URI"]);
+            $path = $url['path'];
+            $this->_router->runAction($path);
+        }
+
+        if ($this->_runIn == App::RUN_IN_CONSOLE) {
+            $this->_console->setArgs($this->_args);
+            $this->_console->run();
+        }
 
         echo $this->getResponse();
+    }
+
+    public function setArgs($_args) {
+        $this->_args = $_args;
     }
 
     public function loadConfig() {
