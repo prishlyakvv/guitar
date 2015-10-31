@@ -4,6 +4,7 @@ namespace System\Controller\Component;
 
 
 use System\Controller\MainComponent;
+use System\App;
 
 class PaginatorComponent extends MainComponent {
 
@@ -138,7 +139,7 @@ class PaginatorComponent extends MainComponent {
         }
 
         $paramsArr = $this->_params;
-        $params = $this->getApp()->getRouter()->getCurrentPath() . '?';
+        $params = App::getInstance()->getRouter()->getCurrentPath() . '?';
 
         if ($paramsArr) {
             if (isset($paramsArr['page'])) {

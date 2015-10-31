@@ -6,13 +6,14 @@ use src\Controllers\MainController;
 use src\Models\Category;
 use src\Controllers\App\Component\TopMenuComponent;
 use System\Controller\Component\PaginatorComponent;
+use System\App;
 
 class CategoryController extends MainController {
 
     public function indexAction() {
 
         $paginator = new PaginatorComponent($this);
-        $catTbl = new Category($this->getApp());
+        $catTbl = new Category();
         $countCategories = $catTbl->getCountAllThisLevelCategories();
         $paginator->setCount($countCategories);
         $paginatorResp = $paginator->toString();
@@ -34,7 +35,7 @@ class CategoryController extends MainController {
 
         $catId = (int) $this->getRequestParam('id', 0);
 
-        $catTbl = new Category($this->getApp());
+        $catTbl = new Category();
         $category = $catTbl->getCategory($catId);
 
         if (!$category) {

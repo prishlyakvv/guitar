@@ -5,6 +5,7 @@ namespace src\Controllers\App;
 use src\Controllers\MainController;
 use src\Models\Product;
 use src\Controllers\App\Component\TopMenuComponent;
+use System\App;
 
 class ProductController extends MainController {
 
@@ -12,7 +13,7 @@ class ProductController extends MainController {
 
         $prodId = (int) $this->getRequestParam('id', 0);
 
-        $prodTbl = new Product($this->getApp());
+        $prodTbl = new Product(App::getInstance());
         $product = $prodTbl->getProduct($prodId);
 
         $componentMenu = new TopMenuComponent($this);

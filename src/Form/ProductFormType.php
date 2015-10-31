@@ -8,6 +8,7 @@ use System\Form\MainFormType;
 use System\Form\MainForm;
 use System\Form\Validator\MainValidator;
 use src\Models\Category;
+use System\App;
 
 class ProductFormType extends MainFormType {
 
@@ -34,7 +35,7 @@ class ProductFormType extends MainFormType {
 
         $form->addText('price', 'Цена', '', true, array(MainValidator::IS_INTEGER => true));
 
-        $tblCat = new Category($this->getApp());
+        $tblCat = new Category();
         $categories = $tblCat->getAllCategoriesForFilter();
         $form->addSelect('category_id', 'Категория', '0', $categories);
 
@@ -53,7 +54,7 @@ class ProductFormType extends MainFormType {
     }
 
     protected function setDefaults() {
-        $this->setDataClass(new Product($this->getApp()));
+        $this->setDataClass(new Product());
     }
 
     /**
@@ -77,12 +78,12 @@ class ProductFormType extends MainFormType {
 
         if (!empty($_FILES['file']['name']) && $id) {
 
-            $configTwigUpload = $this->getApp()->getConfigParam('upload_files');
+            $configTwigUpload = App::getInstance()->getConfigParam('upload_files');
             if (!isset($configTwigUpload['images_category_and_product'])) {
                 throw new \Exception('Неверные Параметры конфигурации upload_files');
             }
             $prefix = $configTwigUpload['images_category_and_product'] . '/product/';
-            $uploaddir = $this->getApp()->getCurrDir() . '/web' . $prefix;
+            $uploaddir = App::getInstance()->getCurrDir() . '/web' . $prefix;
             $info = new \SplFileInfo($_FILES['file']['name']);
             $fileExtension = $info->getExtension();
             $uploadfile = $uploaddir . $id . '.' . $fileExtension;
@@ -113,13 +114,13 @@ class ProductFormType extends MainFormType {
             return false;
         }
 
-        $configTwigUpload = $this->getApp()->getConfigParam('upload_files');
+        $configTwigUpload = App::getInstance()->getConfigParam('upload_files');
         if (!isset($configTwigUpload['images_category_and_product'])) {
             throw new \Exception('Неверные Параметры конфигурации upload_files');
         }
 
         $id = (int) $data['id'];
-        $file = $this->getApp()->getCurrDir() . '/web' . $configTwigUpload['images_category_and_product'] . '/product/' . $id . '.*';
+        $file = App::getInstance()->getCurrDir() . '/web' . $configTwigUpload['images_category_and_product'] . '/product/' . $id . '.*';
 
         array_map('unlink', glob($file));
 

@@ -2,6 +2,8 @@
 
 namespace System\Controller;
 
+use System\App;
+
 
 abstract class MainComponent {
 
@@ -26,13 +28,6 @@ abstract class MainComponent {
     }
 
     /**
-     * @return \System\App
-     */
-    protected function getApp() {
-        return $this->_controller->getApp();
-    }
-
-    /**
      * Если в потомке нужно выполнять какие то действия при инициализации
      * Все эти действия пишем в переопределеном методе
      */
@@ -50,7 +45,7 @@ abstract class MainComponent {
      * @return string
      */
     protected function render($data = array(), $template) {
-        return $this->getApp()->getTemplater()->render($data, $template);
+        return App::getInstance()->getTemplater()->render($data, $template);
     }
 
     /**
@@ -58,7 +53,7 @@ abstract class MainComponent {
      */
     protected function getNotified() {
 
-        return $this->getApp()->getSession()->getNotified();
+        return App::getInstance()->getSession()->getNotified();
 
     }
 
@@ -68,7 +63,7 @@ abstract class MainComponent {
      */
     protected function addNotify($message) {
 
-        return $this->getApp()->getSession()->addNotify($message);
+        return App::getInstance()->getSession()->addNotify($message);
 
     }
 

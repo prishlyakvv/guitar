@@ -12,12 +12,6 @@ class MainFormType {
      */
     protected $_form;
 
-
-    /**
-     * @var \System\App
-     */
-    private $_app;
-
     /**
      * @var \System\Controller\MainController
      */
@@ -49,14 +43,12 @@ class MainFormType {
     protected $_data = array();
 
     /**
-     * @param $app
      * @param $controller
      */
-    public function __construct($app, $controller) {
-        $this->_app = $app;
+    public function __construct($controller) {
         $this->_controller = $controller;
         $this->_validator = new MainValidator();
-        $form = new MainForm($this->_app);
+        $form = new MainForm();
         $this->_form = $this->make($form);
         $this->setDefaults();
         $this->fixPKField($form);
@@ -168,14 +160,6 @@ class MainFormType {
         $this->fill($data);
         return $this->isValid();
 
-    }
-
-    /**
-     * @return \System\App
-     */
-    public function getApp()
-    {
-        return $this->_app;
     }
 
     /**

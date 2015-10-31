@@ -6,6 +6,7 @@ use src\Controllers\Backend\Component\NotifyComponent;
 use src\Controllers\Backend\Component\TopMenuComponent;
 use src\Form\LoginFormType;
 use src\Models\Users;
+use System\App;
 
 class DefaultBackendController extends MainBackendController {
 
@@ -17,7 +18,7 @@ class DefaultBackendController extends MainBackendController {
         $componentNotify = new NotifyComponent($this);
         $componentNotifyResp = $componentNotify->toString();
 
-        $sess = $this->getApp()->getSession();
+        $sess = App::getInstance()->getSession();
 
         if ($this->getRequestParam('exit', false)) {
             $sess->set('login_id', null);
@@ -27,13 +28,13 @@ class DefaultBackendController extends MainBackendController {
 
         $username = '';
         if (!$sess->getByName('login_id') || !$sess->getByName('login_name')) {
-            $formUser = new LoginFormType($this->getApp(), $this);
+            $formUser = new LoginFormType($this);
             if ($_POST) {
 
                 $res = array();
                 $res['redirect'] = false;
                 if ($formUser->fillAndIsValid()) {
-                    $tblUser = new Users($this->getApp());
+                    $tblUser = new Users();
                     $login = $tblUser->login($formUser->getData());
                     if (isset($login['id']) && isset($login['name'])) {
                         $sess->set('login_id', $login['id']);

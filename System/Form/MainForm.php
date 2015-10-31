@@ -11,6 +11,7 @@ use System\Form\Fields\Hidden;
 use System\Form\Fields\Select;
 use System\Form\Fields\Bool;
 use System\Form\Validator\MainValidator;
+use System\App;
 
 class MainForm {
 
@@ -26,20 +27,6 @@ class MainForm {
     private $_errors = array();
     private $_formErrors = array();
     private $_isAjax = false;
-
-    /**
-     * @var \System\App
-     */
-    private $_app;
-
-    /**
-     * @param $app
-     */
-    public function __construct($app) {
-
-        $this->_app = $app;
-
-    }
 
     /**
      * Форма не должна иметь элименты с одним name
@@ -314,21 +301,13 @@ class MainForm {
     }
 
     /**
-     * @return \System\App
-     */
-    public function getApp()
-    {
-        return $this->_app;
-    }
-
-    /**
      * @param array $data
      * @param $template
      * @return string
      */
     protected function renderTmpl($data = array(), $template) {
 
-        return $this->getApp()->getTemplater()->render($data, $template);
+        return App::getInstance()->getTemplater()->render($data, $template);
 
     }
 

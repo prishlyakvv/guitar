@@ -15,7 +15,7 @@ class ProductBackendController extends MainBackendController {
         $component = new TopMenuComponent($this);
         $componentResp = $component->toString();
 
-        $productTbl = new Product($this->getApp());
+        $productTbl = new Product();
 
         if ($_POST && isset($_POST['remove'])) {
             if ($productTbl->removeProducts($_POST['remove'])) {
@@ -26,7 +26,7 @@ class ProductBackendController extends MainBackendController {
             $this->redirect('backend_products');
         }
 
-        $filter = new MainFilter($this->getApp(), $this);
+        $filter = new MainFilter($this);
         $data = array(
             array('id' => 0, 'name' => 'Все статусы'),
             array('id' => 'visible', 'name' => 'Видимые'),
@@ -53,7 +53,7 @@ class ProductBackendController extends MainBackendController {
 
         $prodId = (int) $this->getRequestParam('id', 0);
 
-        $productTbl = new Product($this->getApp());
+        $productTbl = new Product();
         $product = $productTbl->getProduct($prodId);
 
         if (!$product) {
@@ -66,7 +66,7 @@ class ProductBackendController extends MainBackendController {
         $componentNotify = new NotifyComponent($this);
         $componentNotifyResp = $componentNotify->toString();
 
-        $form = new ProductFormType($this->getApp(), $this);
+        $form = new ProductFormType($this);
 
         $form->fill($product);
         if ($_POST) {

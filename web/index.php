@@ -15,7 +15,7 @@ function AutoLoader($className)
 }
 
 //Инициализация
-$app = new App();
+$app = App::getInstance();
 
 /**
  * Для продакшен сервера вызвать

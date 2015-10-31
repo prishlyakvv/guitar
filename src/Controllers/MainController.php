@@ -3,6 +3,7 @@
 namespace src\Controllers;
 
 use System\Controller\MainController as BaseMainController;
+use System\App;
 
 
 class MainController extends BaseMainController {
@@ -26,7 +27,7 @@ class MainController extends BaseMainController {
      */
     protected function getRoutePathByName($name) {
 
-        return $this->getApp()->getRouter()->getPathByName($name);
+        return App::getInstance()->getRouter()->getPathByName($name);
 
     }
 

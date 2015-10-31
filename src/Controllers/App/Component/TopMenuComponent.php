@@ -13,7 +13,7 @@ class TopMenuComponent extends MainComponent {
 
     protected function run() {
 
-        $catTbl = new Category($this->getApp());
+        $catTbl = new Category();
         $categories = $catTbl->getAllThisLevelCategories();
 
         return $this->render(array(

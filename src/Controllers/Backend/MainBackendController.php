@@ -3,20 +3,21 @@
 namespace src\Controllers\Backend;
 
 use src\Controllers\MainController;
+use System\App;
 
 
 class MainBackendController extends MainController {
 
-    public function __construct($app) {
-        parent::__construct($app);
+    public function __construct() {
+        parent::__construct();
 
         $this->checkAuthorizate();
     }
 
     protected function checkAuthorizate() {
-        $sess = $this->getApp()->getSession();
+        $sess = App::getInstance()->getSession();
         if (!$sess->getByName('login_id') || !$sess->getByName('login_name')) {
-            $router = $this->getApp()->getRouter();
+            $router = App::getInstance()->getRouter();
             if ($router->getCurrentPath() != $router->getPathByName('backend_index')) {
                 $this->redirect('backend_index');
             }

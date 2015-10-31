@@ -36,7 +36,7 @@ class Router extends MainRouter implements RouterInterface {
             throw new \Exception('Отсутствует класс или екшен (' . $classController . '->' . $actionController . ')');
         }
 
-        $controller = new $classController($this->getApp());
+        $controller = new $classController();
         $controller->$actionController();
 
     }
@@ -67,7 +67,7 @@ class Router extends MainRouter implements RouterInterface {
         }
 
         if (!$this->_controller) {
-            $this->_controller = new MainController($this->getApp());
+            $this->_controller = new MainController();
             $this->_controller->notFound();
         }
 

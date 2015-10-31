@@ -37,17 +37,26 @@ final class App {
 
     protected $connectionDB;
 
+    private static $_instance;
+
     /**
      * @var Services\Session
      */
     protected $_session;
 
-    public function __construct() {
+    private function __construct() {
         $this->_session = new Session($this);
         $this->_templater = new Twig($this);
         $this->_router = new Router($this);
         $this->loadConfig();
         $this->_currDir = __DIR__ . '/..';
+    }
+
+    public static function getInstance() {
+        if (!self::$_instance) {
+            self::$_instance = new self();
+        }
+        return self::$_instance;
     }
 
     /**

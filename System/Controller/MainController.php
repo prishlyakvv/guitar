@@ -2,13 +2,9 @@
 
 namespace System\Controller;
 
+use System\App;
 
 class MainController {
-
-    /**
-     * @var \System\App
-     */
-    private  $_app;
 
     /**
      * Можно было бы вынести в отдельный клас
@@ -18,19 +14,8 @@ class MainController {
      */
     protected $_request = array();
 
-    /**
-     * @param $app
-     */
-    public function __construct($app) {
-        $this->_app = $app;
+    public function __construct() {
         $this->prepareRequest();
-    }
-
-    /**
-     * @return \System\App
-     */
-    public function getApp() {
-        return $this->_app;
     }
 
     /**
@@ -75,7 +60,7 @@ class MainController {
      */
     protected function render($data = array(), $template) {
 
-        return $this->getApp()->getTemplater()->render($data, $template);
+        return App::getInstance()->getTemplater()->render($data, $template);
 
     }
 
@@ -84,7 +69,7 @@ class MainController {
      */
     protected function getNotified() {
 
-        return $this->getApp()->getSession()->getNotified();
+        return App::getInstance()->getSession()->getNotified();
 
     }
 
@@ -94,7 +79,7 @@ class MainController {
      */
     protected function addNotify($message) {
 
-        return $this->getApp()->getSession()->addNotify($message);
+        return App::getInstance()->getSession()->addNotify($message);
 
     }
 
@@ -105,7 +90,7 @@ class MainController {
      */
     protected function redirect($name, $params = array()) {
 
-        $path = $this->getApp()->getRouter()->getPathByName($name, $params);
+        $path = App::getInstance()->getRouter()->getPathByName($name, $params);
         http_redirect($path);
 
     }

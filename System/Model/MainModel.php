@@ -4,6 +4,7 @@ namespace System\Model;
 
 use PDO;
 use System\Lib\SmallLibs;
+use System\App;
 
 abstract class MainModel implements ModelInterface {
 
@@ -16,11 +17,6 @@ abstract class MainModel implements ModelInterface {
 
     const TYPE_INT = 'int';
     const TYPE_STRING = 'string';
-
-    /**
-     * @var \System\App
-     */
-    private $_app;
 
     /**
      * @var \PDO
@@ -43,11 +39,9 @@ abstract class MainModel implements ModelInterface {
     private $_srcQueryLimit = '';
 
 
-    public function __construct($app) {
+    public function __construct() {
 
-        $this->_app = $app;
-
-        $configDB = $this->getApp()->getConfigParam('db_parameters');
+        $configDB = App::getInstance()->getConfigParam('db_parameters');
 
         $dsn = "mysql:host={$configDB['database_host']};dbname={$configDB['database_name']};charset={$configDB['database_encoding']}";
         $opt = array(
@@ -58,12 +52,12 @@ abstract class MainModel implements ModelInterface {
         /**
          * Соединение создается 1 раз и хранится в классе App
          */
-        if (!$this->getApp()->getConnectionDB()) {
+        if (!App::getInstance()->getConnectionDB()) {
             $coonection = new PDO($dsn, $configDB['database_user'], $configDB['database_password'], $opt);
-            $this->getApp()->setConnectionDB($coonection);
+            App::getInstance()->setConnectionDB($coonection);
         }
 
-        $this->_connection = $this->getApp()->getConnectionDB();
+        $this->_connection = App::getInstance()->getConnectionDB();
     }
 
     protected function clearParamsQuery() {
@@ -81,14 +75,6 @@ abstract class MainModel implements ModelInterface {
      * @return mixed
      */
     public abstract function getColumns();
-
-    /**
-     * @return \System\App
-     */
-    public function getApp() {
-        return $this->_app;
-    }
-
 
     /**
      * SELECT $columns FROM

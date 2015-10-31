@@ -5,6 +5,7 @@ namespace System\Form;
 use System\Form\Fields\Text;
 use System\Form\Fields\Select;
 use System\Form\Fields\Bool;
+use System\App;
 
 
 class MainFilter {
@@ -18,11 +19,6 @@ class MainFilter {
     private $_templ = 'Form/filter.html';
 
     /**
-     * @var \System\App
-     */
-    private $_app;
-
-    /**
      * @var \System\Controller\MainController
      */
     private $_controller;
@@ -30,12 +26,10 @@ class MainFilter {
     private $_data = array();
 
     /**
-     * @param $app
      * @param $controller
      */
-    public function __construct($app, $controller) {
+    public function __construct($controller) {
 
-        $this->_app = $app;
         $this->_controller = $controller;
 
     }
@@ -166,21 +160,13 @@ class MainFilter {
     }
 
     /**
-     * @return \System\App
-     */
-    public function getApp()
-    {
-        return $this->_app;
-    }
-
-    /**
      * @param array $data
      * @param $template
      * @return string
      */
     protected function renderTmpl($data = array(), $template) {
 
-        return $this->getApp()->getTemplater()->render($data, $template);
+        return App::getInstance()->getTemplater()->render($data, $template);
 
     }
 

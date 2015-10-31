@@ -5,8 +5,6 @@ namespace System\Services;
 
 class Session {
 
-    private $_app;
-
     private $_notifyNameArr = 'notify';
 
     /**
@@ -14,8 +12,7 @@ class Session {
      */
     private $_source;
 
-    public function __construct($app) {
-        $this->_app = $app;
+    public function __construct() {
         $this->start();
         $this->_source = &$_SESSION;
 

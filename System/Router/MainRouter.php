@@ -4,15 +4,9 @@ namespace System\Router;
 
 abstract class MainRouter {
 
-    /**
-     * @var \System\App
-     */
-    private  $_app;
-
     protected $_controller;
 
-    public function __construct($app) {
-        $this->_app = $app;
+    public function __construct() {
         $this->loadRoutes();
     }
 
@@ -22,7 +16,4 @@ abstract class MainRouter {
 
     protected abstract function getController($url);
 
-    protected function getApp() {
-        return $this->_app;
-    }
 }

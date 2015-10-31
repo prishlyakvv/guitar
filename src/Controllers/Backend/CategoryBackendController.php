@@ -14,7 +14,7 @@ class CategoryBackendController extends MainBackendController {
         $componentMenu = new TopMenuComponent($this);
         $componentMenuResp = $componentMenu->toString();
 
-        $categoriesTbl = new Category($this->getApp());
+        $categoriesTbl = new Category();
         $cats = $categoriesTbl->getAllCategories();
 
         if ($_POST && isset($_POST['remove'])) {
@@ -41,7 +41,7 @@ class CategoryBackendController extends MainBackendController {
 
         $catId = (int) $this->getRequestParam('id', 0);
 
-        $categoriesTbl = new Category($this->getApp());
+        $categoriesTbl = new Category();
         $cat = $categoriesTbl->getCategory($catId);
 
         if (!$cat) {
@@ -54,7 +54,7 @@ class CategoryBackendController extends MainBackendController {
         $componentNotify = new NotifyComponent($this);
         $componentNotifyResp = $componentNotify->toString();
 
-        $form = new CategoryFormType($this->getApp(), $this);
+        $form = new CategoryFormType($this);
 
         $form->fill($cat);
         if ($_POST) {

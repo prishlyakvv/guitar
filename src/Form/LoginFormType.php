@@ -33,7 +33,7 @@ class LoginFormType extends MainFormType {
     }
 
     protected function setDefaults() {
-        $this->setDataClass(new Category($this->getApp()));
+        $this->setDataClass(new Category());
     }
 
 } 
