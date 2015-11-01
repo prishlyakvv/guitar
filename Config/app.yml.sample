@@ -7,9 +7,8 @@ db_parameters:
     database_encoding: utf8
 
 twig_params:
-    cache_path: '../cache/template'
-    #todo many setting twig
-    templates_path: '../Plugins/Store/Templates'
+    cache_path: 'Cache/template'
+    templates_path: 'System/Template/html/'
 
 upload_files:
     images_category_and_product: /img/uploaded

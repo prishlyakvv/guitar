@@ -21,11 +21,19 @@ class Twig extends MainTemplate implements TemplateInterface {
             throw new \Exception('Неверные Параметры конфигурации twig');
         }
 
-        $loader = new Twig_Loader_Filesystem($configTwig['templates_path']);
+        $loader = new Twig_Loader_Filesystem(ROOT . '/../' . $configTwig['templates_path']);
+
+        /**
+         * add template path plugins
+         */
+        foreach (App::getInstance()->getPlugins() as $plagin) {
+            $loader->addPath(ROOT . '/../Plugins/' . $plagin->getName() . '/Templates');
+        }
+
         $isProd = App::getInstance()->isProd();
 
         $this->_environment = new Twig_Environment($loader, array(
-            'cache'       => $configTwig['cache_path'],
+            'cache'       => ROOT . '/../' . $configTwig['cache_path'],
             'auto_reload' => !$isProd,
             'debug' => !$isProd,
         ));

@@ -242,6 +242,8 @@ final class App {
             $itemPlugin = new $pluginPath();
             $plaginRes = $itemPlugin->init();
 
+            $this->plugins[] = $itemPlugin;
+
             if ($plaginRes['routes']) {
                 $this->getRouter()->setRoutes(array_replace_recursive($this->getRouter()->getRoutes(), $plaginRes['routes']));
             }
@@ -251,6 +253,14 @@ final class App {
             }
 
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getPlugins()
+    {
+        return $this->plugins;
     }
 }
 

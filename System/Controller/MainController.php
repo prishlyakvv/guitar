@@ -101,8 +101,13 @@ class MainController {
 
         $url = htmlentities('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], ENT_QUOTES);
 
-        echo "Страница {$url} не существует.";
+        echo $this->render(array(
+            'url' => $url,
+        ), 'notFoundMain.html');
+
         exit();
+
+
     }
 
 } 
