@@ -5,8 +5,8 @@ namespace Plugins\Store\Controllers\Backend;
 use Plugins\Store\Controllers\Backend\Component\TopMenuComponent;
 use Plugins\Store\Models\Product;
 use Plugins\Store\Controllers\Backend\Component\NotifyComponent;
-use Plugins\Store\Form\ProductFormType;
-use System\Form\MainFilter;
+use Plugins\Store\Others\Form\ProductFormType;
+use System\Other\Form\MainFilter;
 
 class ProductBackendController extends MainBackendController {
 

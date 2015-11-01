@@ -1,0 +1,15 @@
+db_parameters:
+    database_type: 12345
+    database_host: localhost
+    database_name: test_refactor
+    database_user: root
+    database_password: 123456
+    database_encoding: utf8
+
+twig_params:
+    cache_path: '../Cache/template'
+    #todo many setting twig
+    templates_path: '../Plugins/Store/Templates'
+
+upload_files:
+    images_category_and_product: /img/uploaded

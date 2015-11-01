@@ -1,6 +1,6 @@
-/cache/*
-!/cache/template/empty.txt
-/config/app.yml
+/Cache/*
+!/Cache/template/empty.txt
+/Config/app.yml
 /vendor/*
 /composer.lock
 /.idea

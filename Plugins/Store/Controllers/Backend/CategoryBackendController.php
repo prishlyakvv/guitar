@@ -5,7 +5,7 @@ namespace Plugins\Store\Controllers\Backend;
 use Plugins\Store\Controllers\Backend\Component\TopMenuComponent;
 use Plugins\Store\Models\Category;
 use Plugins\Store\Controllers\Backend\Component\NotifyComponent;
-use Plugins\Store\Form\CategoryFormType;
+use Plugins\Store\Others\Form\CategoryFormType;
 
 class CategoryBackendController extends MainBackendController {
 

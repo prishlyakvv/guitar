@@ -2,12 +2,13 @@
 
 namespace System;
 
-use System\Router\Router;
-use System\Services\Session;
+use System\Other\Router\Router;
+use System\Other\Services\Session;
 use System\Template\TemplateInterface;
-use System\Router\RouterInterface;
+use System\Other\Router\RouterInterface;
 use System\Template\Twig;
-use System\Lib\YmlParser;
+use System\Other\Lib\YmlParser;
+use System\Other\Console;
 
 final class App {
 
@@ -45,7 +46,7 @@ final class App {
     private static $_instance;
 
     /**
-     * @var Services\Session
+     * @var Other\Services\Session
      */
     protected $_session;
 
@@ -150,7 +151,7 @@ final class App {
     public function loadConfig() {
 
         $parser = new YmlParser();
-        $this->_config = $parser->parse('config/app.yml');
+        $this->_config = $parser->parse('Config/app.yml');
 
     }
 
@@ -232,7 +233,7 @@ final class App {
 
         foreach ($plugins['enable_plugins'] as $pluginPath) {
 
-            $pluginPath .= '\Main';
+            $pluginPath .= '\Plugin';
 
             if (!file_exists(ROOT . '/../' . str_replace('\\', '/', $pluginPath . '.php'))) {
                 throw new \Exception('Plugin wrong path');

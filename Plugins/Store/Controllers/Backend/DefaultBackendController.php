@@ -4,7 +4,7 @@ namespace Plugins\Store\Controllers\Backend;
 
 use Plugins\Store\Controllers\Backend\Component\NotifyComponent;
 use Plugins\Store\Controllers\Backend\Component\TopMenuComponent;
-use Plugins\Store\Form\LoginFormType;
+use Plugins\Store\Others\Form\LoginFormType;
 use Plugins\Store\Models\Users;
 use System\App;
 

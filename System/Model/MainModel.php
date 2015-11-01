@@ -3,7 +3,7 @@
 namespace System\Model;
 
 use PDO;
-use System\Lib\SmallLibs;
+use System\Other\Lib\SmallLibs;
 use System\App;
 
 abstract class MainModel implements ModelInterface {
