@@ -2,8 +2,7 @@
 
 namespace System\Router;
 
-//todo поправить
-use Plugins\Store\Controllers\MainController;
+use System\Controller\MainController;
 use System\Lib\YmlParser;
 
 class Router extends MainRouter implements RouterInterface {

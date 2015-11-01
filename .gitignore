@@ -1,4 +1,5 @@
 /cache/template/*
+!/cache/template/empty.txt
 /config/app.yml
 /vendor/*
 /composer.lock

@@ -95,4 +95,14 @@ class MainController {
 
     }
 
+    public function notFound() {
+
+        header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+
+        $url = htmlentities('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], ENT_QUOTES);
+
+        echo "Страница {$url} не существует.";
+        exit();
+    }
+
 } 
