@@ -2,7 +2,8 @@
 
 namespace System\Router;
 
-use src\Controllers\MainController;
+//todo поправить
+use Plugins\Store\Controllers\MainController;
 use System\Lib\YmlParser;
 
 class Router extends MainRouter implements RouterInterface {
@@ -49,6 +50,14 @@ class Router extends MainRouter implements RouterInterface {
         $parser = new YmlParser();
         $this->_routes = $parser->parse('System/Router/routes.yml');
 
+    }
+
+    public function setRoutes($routes) {
+        $this->_routes = $routes;
+    }
+
+    public function getRoutes() {
+        return $this->_routes;
     }
 
     /**

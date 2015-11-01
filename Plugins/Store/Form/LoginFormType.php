@@ -1,12 +1,12 @@
 <?php
 
-namespace src\Form;
+namespace Plugins\Store\Form;
 
 
 use System\Form\MainFormType;
 use System\Form\MainForm;
 use System\Form\Validator\MainValidator;
-use src\Models\Category;
+use Plugins\Store\Models\Category;
 
 class LoginFormType extends MainFormType {
 

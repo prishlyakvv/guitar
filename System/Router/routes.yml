@@ -1,1 +1,9 @@
-import: src/Others/Routes/routes.yml
+#todo
+#import: Plugins/Store/Others/Routes/routes.yml
+product:
+    path:      /delete/
+    controller: Plugins\Store\Controllers\App\CategoryController:indexAction
+
+product22:
+    path:      /delete/
+    controller: Plugins\Store\Controllers\App\CategoryController:indexAction

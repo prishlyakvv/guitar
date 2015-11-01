@@ -1,11 +1,11 @@
 <?php
 
-namespace src\Controllers\Backend;
+namespace Plugins\Store\Controllers\Backend;
 
-use src\Controllers\Backend\Component\TopMenuComponent;
-use src\Models\Category;
-use src\Controllers\Backend\Component\NotifyComponent;
-use src\Form\CategoryFormType;
+use Plugins\Store\Controllers\Backend\Component\TopMenuComponent;
+use Plugins\Store\Models\Category;
+use Plugins\Store\Controllers\Backend\Component\NotifyComponent;
+use Plugins\Store\Form\CategoryFormType;
 
 class CategoryBackendController extends MainBackendController {
 

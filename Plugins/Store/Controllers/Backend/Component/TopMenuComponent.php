@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Controllers\Backend\Component;
+namespace Plugins\Store\Controllers\Backend\Component;
 
 use System\Controller\MainComponent;
 

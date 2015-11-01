@@ -53,12 +53,15 @@ final class App {
 
     private $_args = array();
 
+    protected $plugins = array();
+
     private function __construct($runIn) {
 
+        $this->_session = new Session();
+        $this->_router = new Router();
+
         if ($runIn == App::RUN_IN_WEB) {
-            $this->_session = new Session();
             $this->_templater = new Twig();
-            $this->_router = new Router();
         }
 
         if ($runIn == App::RUN_IN_CONSOLE) {
@@ -69,6 +72,7 @@ final class App {
 
         $this->loadConfig();
         $this->_currDir = __DIR__ . '/..';
+        $this->installPlugins();
     }
 
     public static function getInstance($runIn = App::RUN_IN_WEB) {
@@ -150,6 +154,14 @@ final class App {
 
     }
 
+    public function getConfig() {
+        return $this->_config;
+    }
+
+    public function setConfig($config) {
+        $this->_config = $config;
+    }
+
     public function getConfigParam($param) {
 
         if (isset($this->_config[$param])) {
@@ -209,5 +221,35 @@ final class App {
         $this->connectionDB = $connectionDB;
     }
 
+    public function installPlugins() {
+
+        $parser = new YmlParser();
+        $plugins = $parser->parse('Plugins/plugins.yml');
+
+        if (!isset($plugins['enable_plugins']) || !is_array($plugins['enable_plugins']) || !count($plugins['enable_plugins'])) {
+            throw new \Exception('Plugins not installed');
+        }
+
+        foreach ($plugins['enable_plugins'] as $pluginPath) {
+
+            $pluginPath .= '\Main';
+
+            if (!file_exists(ROOT . '/../' . str_replace('\\', '/', $pluginPath . '.php'))) {
+                throw new \Exception('Plugin wrong path');
+            }
+
+            $itemPlugin = new $pluginPath();
+            $plaginRes = $itemPlugin->init();
+
+            if ($plaginRes['routes']) {
+                $this->getRouter()->setRoutes(array_replace_recursive($this->getRouter()->getRoutes(), $plaginRes['routes']));
+            }
+
+            if ($plaginRes['configuration']) {
+                $this->setConfig(array_replace_recursive($this->getConfig(), $plaginRes['configuration']));
+            }
+
+        }
+    }
 }
 

@@ -2,8 +2,6 @@
 
 namespace System\Lib;
 
-//Использовал компонент для чтения *.yml файлов
-//Никакой другой логики этот стороний компонент не несет для проекта
 use Symfony\Component\Yaml\Parser;
 
 class YmlParser {
@@ -23,7 +21,7 @@ class YmlParser {
         $value = $yamlPS->parse($content);
         $value = $this->appendIncludes($value);
 
-        return $value;
+        return (array) $value;
     }
 
     /**

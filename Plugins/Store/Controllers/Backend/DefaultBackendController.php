@@ -1,11 +1,11 @@
 <?php
 
-namespace src\Controllers\Backend;
+namespace Plugins\Store\Controllers\Backend;
 
-use src\Controllers\Backend\Component\NotifyComponent;
-use src\Controllers\Backend\Component\TopMenuComponent;
-use src\Form\LoginFormType;
-use src\Models\Users;
+use Plugins\Store\Controllers\Backend\Component\NotifyComponent;
+use Plugins\Store\Controllers\Backend\Component\TopMenuComponent;
+use Plugins\Store\Form\LoginFormType;
+use Plugins\Store\Models\Users;
 use System\App;
 
 class DefaultBackendController extends MainBackendController {

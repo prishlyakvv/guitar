@@ -1,10 +1,10 @@
 <?php
 
-namespace src\Controllers\App;
+namespace Plugins\Store\Controllers\App;
 
-use src\Controllers\MainController;
-use src\Models\Product;
-use src\Controllers\App\Component\TopMenuComponent;
+use Plugins\Store\Controllers\MainController;
+use Plugins\Store\Models\Product;
+use Plugins\Store\Controllers\App\Component\TopMenuComponent;
 use System\App;
 
 class ProductController extends MainController {
@@ -13,7 +13,7 @@ class ProductController extends MainController {
 
         $prodId = (int) $this->getRequestParam('id', 0);
 
-        $prodTbl = new Product(App::getInstance());
+        $prodTbl = new Product();
         $product = $prodTbl->getProduct($prodId);
 
         $componentMenu = new TopMenuComponent($this);

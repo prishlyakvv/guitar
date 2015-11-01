@@ -1,9 +1,9 @@
 <?php
 
-namespace src\Controllers\App\Component;
+namespace Plugins\Store\Controllers\App\Component;
 
 use System\Controller\MainComponent;
-use src\Models\Category;
+use Plugins\Store\Models\Category;
 
 class TopMenuComponent extends MainComponent {
 

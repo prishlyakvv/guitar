@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Models;
+namespace Plugins\Store\Models;
 
 use System\Model\MainModel;
 

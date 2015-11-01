@@ -1,0 +1,13 @@
+import: Plugins/Store/Others/Routes/routesBackend.yml
+
+categories:
+    path:      /
+    controller: Plugins\Store\Controllers\App\CategoryController:indexAction
+
+category:
+    path:      /category/
+    controller: Plugins\Store\Controllers\App\CategoryController:categoryAction
+
+product:
+    path:      /product/
+    controller: Plugins\Store\Controllers\App\ProductController:indexAction

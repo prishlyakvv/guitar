@@ -1,11 +1,11 @@
 <?php
 
-namespace src\Controllers\Backend;
+namespace Plugins\Store\Controllers\Backend;
 
-use src\Controllers\Backend\Component\TopMenuComponent;
-use src\Models\Product;
-use src\Controllers\Backend\Component\NotifyComponent;
-use src\Form\ProductFormType;
+use Plugins\Store\Controllers\Backend\Component\TopMenuComponent;
+use Plugins\Store\Models\Product;
+use Plugins\Store\Controllers\Backend\Component\NotifyComponent;
+use Plugins\Store\Form\ProductFormType;
 use System\Form\MainFilter;
 
 class ProductBackendController extends MainBackendController {

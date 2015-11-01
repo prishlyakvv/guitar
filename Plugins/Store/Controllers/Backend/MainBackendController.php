@@ -1,8 +1,8 @@
 <?php
 
-namespace src\Controllers\Backend;
+namespace Plugins\Store\Controllers\Backend;
 
-use src\Controllers\MainController;
+use Plugins\Store\Controllers\MainController;
 use System\App;
 
 

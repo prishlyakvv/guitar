@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Controllers;
+namespace Plugins\Store\Controllers;
 
 use System\Controller\MainController as BaseMainController;
 use System\App;

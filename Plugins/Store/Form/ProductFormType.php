@@ -1,13 +1,13 @@
 <?php
 
-namespace src\Form;
+namespace Plugins\Store\Form;
 
 
-use src\Models\Product;
+use Plugins\Store\Models\Product;
 use System\Form\MainFormType;
 use System\Form\MainForm;
 use System\Form\Validator\MainValidator;
-use src\Models\Category;
+use Plugins\Store\Models\Category;
 use System\App;
 
 class ProductFormType extends MainFormType {
