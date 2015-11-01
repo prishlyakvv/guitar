@@ -1,4 +1,4 @@
-/cache/template/*
+/cache/*
 !/cache/template/empty.txt
 /config/app.yml
 /vendor/*
