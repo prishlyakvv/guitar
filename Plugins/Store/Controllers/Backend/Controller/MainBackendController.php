@@ -1,12 +1,12 @@
 <?php
 
-namespace Plugins\Store\Controllers\Backend;
+namespace Plugins\Store\Controllers\Backend\Controller;
 
-use Plugins\Store\Controllers\MainController;
+use System\Controller\MainController as BaseMainController;
 use System\App;
 
 
-class MainBackendController extends MainController {
+class MainBackendController extends BaseMainController {
 
     public function __construct() {
         parent::__construct();
@@ -22,6 +22,19 @@ class MainBackendController extends MainController {
                 $this->redirect('backend_index');
             }
         }
+    }
+
+    public function notFound() {
+
+        header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+
+        $url = htmlentities('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], ENT_QUOTES);
+
+        echo $this->render(array(
+            'url' => $url,
+        ), 'notFound.html');
+
+        exit();
     }
 
 } 

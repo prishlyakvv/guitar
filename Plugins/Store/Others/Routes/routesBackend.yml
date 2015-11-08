@@ -1,24 +1,24 @@
 backend_index:
     path:      /admin
-    controller: Plugins\Store\Controllers\Backend\DefaultBackendController:indexAction
+    controller: Plugins\Store\Controllers\Backend\Controller\DefaultBackendController:indexAction
 
 #todo Быстрый фикс потом следует поправить
 backend_index_slash:
     path:      /admin/
-    controller: Plugins\Store\Controllers\Backend\DefaultBackendController:indexAction
+    controller: Plugins\Store\Controllers\Backend\Controller\DefaultBackendController:indexAction
 
 backend_categories:
     path:      /admin/categories
-    controller: Plugins\Store\Controllers\Backend\CategoryBackendController:indexAction
+    controller: Plugins\Store\Controllers\Backend\Controller\CategoryBackendController:indexAction
 
 backend_category:
     path:      /admin/category/
-    controller: Plugins\Store\Controllers\Backend\CategoryBackendController:categoryAction
+    controller: Plugins\Store\Controllers\Backend\Controller\CategoryBackendController:categoryAction
 
 backend_products:
     path:      /admin/products
-    controller: Plugins\Store\Controllers\Backend\ProductBackendController:indexAction
+    controller: Plugins\Store\Controllers\Backend\Controller\ProductBackendController:indexAction
 
 backend_product:
     path:      /admin/product/
-    controller: Plugins\Store\Controllers\Backend\ProductBackendController:productAction
+    controller: Plugins\Store\Controllers\Backend\Controller\ProductBackendController:productAction

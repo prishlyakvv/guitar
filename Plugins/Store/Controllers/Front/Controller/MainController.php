@@ -1,9 +1,8 @@
 <?php
 
-namespace Plugins\Store\Controllers;
+namespace Plugins\Store\Controllers\Front\Controller;
 
 use System\Controller\MainController as BaseMainController;
-use System\App;
 
 
 class MainController extends BaseMainController {
@@ -20,16 +19,5 @@ class MainController extends BaseMainController {
 
         exit();
     }
-
-    /**
-     * @param $name
-     * @return mixed
-     */
-    protected function getRoutePathByName($name) {
-
-        return App::getInstance()->getRouter()->getPathByName($name);
-
-    }
-
 
 } 

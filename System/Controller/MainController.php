@@ -107,6 +107,15 @@ class MainController {
 
         exit();
 
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    protected function getRoutePathByName($name) {
+
+        return App::getInstance()->getRouter()->getPathByName($name);
 
     }
 

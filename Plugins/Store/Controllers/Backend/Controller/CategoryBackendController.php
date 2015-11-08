@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugins\Store\Controllers\Backend;
+namespace Plugins\Store\Controllers\Backend\Controller;
 
 use Plugins\Store\Controllers\Backend\Component\TopMenuComponent;
 use Plugins\Store\Models\Category;

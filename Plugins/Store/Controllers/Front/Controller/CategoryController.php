@@ -1,10 +1,9 @@
 <?php
 
-namespace Plugins\Store\Controllers\App;
+namespace Plugins\Store\Controllers\Front\Controller;
 
-use Plugins\Store\Controllers\MainController;
 use Plugins\Store\Models\Category;
-use Plugins\Store\Controllers\App\Component\TopMenuComponent;
+use Plugins\Store\Controllers\Front\Component\TopMenuComponent;
 use System\Controller\Component\PaginatorComponent;
 
 class CategoryController extends MainController {

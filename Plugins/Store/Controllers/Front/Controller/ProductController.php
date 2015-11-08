@@ -1,11 +1,9 @@
 <?php
 
-namespace Plugins\Store\Controllers\App;
+namespace Plugins\Store\Controllers\Front\Controller;
 
-use Plugins\Store\Controllers\MainController;
 use Plugins\Store\Models\Product;
-use Plugins\Store\Controllers\App\Component\TopMenuComponent;
-use System\App;
+use Plugins\Store\Controllers\Front\Component\TopMenuComponent;
 
 class ProductController extends MainController {
 

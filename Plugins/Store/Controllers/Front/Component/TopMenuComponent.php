@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugins\Store\Controllers\App\Component;
+namespace Plugins\Store\Controllers\Front\Component;
 
 use System\Controller\MainComponent;
 use Plugins\Store\Models\Category;
