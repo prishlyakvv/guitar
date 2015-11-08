@@ -28,6 +28,10 @@ abstract class MainPlugin {
         return $this->name;
     }
 
+    public function getConsole() {
+        return false;
+    }
+
 
 }
 

@@ -8,7 +8,7 @@ use System\Template\TemplateInterface;
 use System\Other\Router\RouterInterface;
 use System\Template\Twig;
 use System\Other\Lib\YmlParser;
-use System\Other\Console;
+use System\Other\Console\Console;
 
 final class App {
 
@@ -242,7 +242,7 @@ final class App {
             $itemPlugin = new $pluginPath();
             $plaginRes = $itemPlugin->init();
 
-            $this->plugins[] = $itemPlugin;
+            $this->plugins[$itemPlugin->getName()] = $itemPlugin;
 
             if ($plaginRes['routes']) {
                 $this->getRouter()->setRoutes(array_replace_recursive($this->getRouter()->getRoutes(), $plaginRes['routes']));

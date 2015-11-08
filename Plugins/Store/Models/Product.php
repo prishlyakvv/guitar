@@ -51,9 +51,10 @@ class Product extends MainModel {
 
     /**
      * @param array $where
+     * @param int $limit
      * @return mixed
      */
-    public function getAllProducts($where = array()) {
+    public function getAllProducts($where = array(), $limit = 0) {
 
         $tbl = $this->selectColumns(array(
                 'id' => 'self.id',
@@ -76,6 +77,10 @@ class Product extends MainModel {
                     $tbl->where('self.visible', 0);
                 }
             }
+        }
+
+        if ($limit) {
+            $tbl->limit((int) $limit);
         }
 
         $tbl->order('self.id ASC')

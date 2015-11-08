@@ -2,7 +2,7 @@
 
 namespace Plugins\Store;
 
-use System\App;
+use Plugins\Store\Others\Console\Console;
 use System\Other\MainPlugin;
 
 
@@ -19,5 +19,8 @@ class Plugin extends MainPlugin {
 
     }
 
+    public function getConsole() {
+        return new Console();
+    }
 
 } 

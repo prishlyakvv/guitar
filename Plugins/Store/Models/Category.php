@@ -36,9 +36,10 @@ class Category extends MainModel {
     }
 
     /**
-     * @return mixed
+     * @param int $limit
+     * @return array
      */
-    public function getAllCategories() {
+    public function getAllCategories($limit = 0) {
 
         $tbl = $this->selectColumns(array(
                 'id' => 'self.id',
@@ -49,6 +50,10 @@ class Category extends MainModel {
             ))
             ->order('self.number_sort ASC')
             ->execute();
+
+        if ($limit) {
+            $tbl->limit((int) $limit);
+        }
 
         $categories = $tbl->fetchAll();
 
