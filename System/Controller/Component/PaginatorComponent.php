@@ -1,5 +1,5 @@
 <?php
-
+//todo вынести в отдельный плагин со встроеными плюшками
 namespace System\Controller\Component;
 
 
